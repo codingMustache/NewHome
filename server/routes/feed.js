@@ -17,7 +17,8 @@ const Pet = require('../db/models/Pet.js');
 
 // GET API page
 feed.get('/api', (req, res) => {
-  getPage()
+  getApiAuth()
+    .then(() => getPage())
     .then((page) => {
       const pets = JSON.parse(page).animals.map(
         (animalData) => new Pet({
