@@ -11,7 +11,7 @@ import {
   Grid,
 } from '@mui/material';
 import { UserContext } from '../UserContext.jsx';
-import PetList from './SavedList.jsx';
+import PetList from './List.jsx';
 // get user data using axios from google and display it on
 // this page as a restricted page
 // err takes user to login page
