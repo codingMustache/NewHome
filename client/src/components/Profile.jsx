@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { Box, Card, Button } from '@mui/material';
 import { UserContext } from '../UserContext.jsx';
+import SavedList from './SavedList.jsx';
 // get user data using axios from google and display it on
 // this page as a restricted page
 // err takes user to login page
@@ -76,7 +77,7 @@ function Profile() {
       <p>
         <img src={user.picture} width={350} height={350} alt="am-broke" />
       </p>
-
+      <SavedList />
       <Button size="small" href="/login" onClick={Logout}>
         logout
       </Button>

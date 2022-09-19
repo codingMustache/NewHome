@@ -6,10 +6,12 @@ import { Box, Grid, Typography } from '@mui/material';
 import Adoption from './Adoption.jsx';
 import Loading from './Loading.jsx';
 import styles from '../styles.jsx';
+import { UserContext } from '../UserContext.jsx';
 
 function AdoptionFeed() {
   const [animals, setAnimals] = useState([]);
   const [fetchedAnimals, setFetchedAnimals] = useState(false);
+
   useEffect(() => {
     axios
       .get('/feed/api')

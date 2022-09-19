@@ -20,8 +20,8 @@ function Adoption({ animalsData }) {
   // this won't render until animals data is defined
   // navigate hook to render petview
   const {
-    user, savedList, isClicked, setClick,
-  } = useContext(UserContext);
+    user, savedList, setSavedList, isClicked, setClick,
+  } =		useContext(UserContext);
   const [loggedIn, setLoggedIn] = useState(false);
   const [isThere, setThere] = useState(false);
   const navigate = useNavigate();
@@ -100,6 +100,15 @@ function Adoption({ animalsData }) {
         })
         .then((data) => {
           console.log('data from pet/savePet', data);
+          axios
+            .get(`/pet/savePet/${user.id}`)
+            .then(({ data }) => {
+              console.log('updated savedList from petview\n', data);
+              setSavedList(data);
+            })
+            .catch((err) => {
+              console.error('error updating pet list\n', err);
+            });
         })
         .catch((err) => {
           console.error('error on /pet/savePet req', err);
@@ -109,11 +118,18 @@ function Adoption({ animalsData }) {
 
   useEffect(
     () => (user !== null ? setLoggedIn(true) : setLoggedIn(false)),
-    // if (isClicked.indexof(petId) !== -1) {
-    //     setThere(true);
-    // }
-    [loggedIn, isThere],
+
+    [loggedIn],
   );
+  useEffect(() => {
+    if (savedList !== null) {
+      savedList.forEach((savedPet) => {
+        if (savedPet.petId === animalsData.id) {
+          setThere(true);
+        }
+      });
+    }
+  }, []);
 
   return (
     <Card raised sx={{ width: '40vw' }}>

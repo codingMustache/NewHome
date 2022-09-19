@@ -149,11 +149,24 @@ pet.get('/api/:petId', (req, res) => {
       if (data) {
         res.status(200).send(data);
       }
-      res.sendStatus(401);
+      // res.sendStatus(401);
     })
     .catch((err) => {
-      console.error('error getting pet from api... ofCourse\n', err);
-      res.sendStatus(500);
+      console.error('error getting pet from api... ofCourse\n', err.response);
+      // res.sendStatus(500);
+      getApiAuth()
+        .then(() => axios.get(`https://api.petfinder.com/v2/animals/${petId}`))
+        .then((data) => {
+          console.log('data', data);
+          if (!data) {
+            res.sendStatus(401);
+          }
+          res.status(200).send(data);
+        })
+        .catch((err) => {
+          console.error('error\n\n\n\n', err);
+          res.sendStatus(500);
+        });
     });
 });
 
@@ -168,5 +181,29 @@ pet.delete('/savePet', (req, res) => SavedPet.findOneAndDelete(req.body)
     console.error(err);
     res.sendStatus(500);
   }));
+
+const getApiAuth = () => new Promise((res, rej) => {
+  const data = JSON.stringify({
+    grant_type: 'client_credentials',
+    client_id: API_KEY,
+    client_secret: API_SECRET,
+  });
+
+  const config = {
+    method: 'post',
+    url: 'https://api.petfinder.com/v2/oauth2/token',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data,
+  };
+
+  axios(config)
+    .then((response) => {
+      process.env.API_AUTH = `Bearer ${response.data.access_token}`;
+      return res();
+    })
+    .catch((err) => rej(err));
+});
 
 module.exports = pet;
