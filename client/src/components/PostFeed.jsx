@@ -14,7 +14,6 @@ function PostFeed() {
       axios
         .get(`/feed/posts/${user.id}`)
         .then(({ data: posts }) => {
-          console.log(posts);
           setPosts(posts.flat());
         })
         .then(() => {
@@ -42,7 +41,6 @@ function PostFeed() {
   updatePosts();
 
   if (posts.length) {
-    // console.log('single animal obj', animals[0]);
     return (
       <Box>
         <Typography variant="h3">Adoption Stories</Typography>

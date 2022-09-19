@@ -26,7 +26,7 @@ function PetView() {
 
   // state from feed component
   const { state } = useLocation();
-  const animal = state.animalsData;
+  const animal = state.animalData;
   const [status, setStatus] = useState(animal.adopted);
 
   // function to save/follow a pet
@@ -162,7 +162,7 @@ function PetView() {
   }, [loggedIn]);
 
   useEffect(() => {
-    if (user.id === animal.userId) {
+    if (user && user.id === animal.userId) {
       setAdoptedByUser(true);
     }
   }, [status]);
@@ -212,7 +212,7 @@ function PetView() {
   <Button
     onClick={handleAdoption}
     variant="contained"
-    href={animal.url}
+    href={animal.link}
   >
     Adopt Me!
   </Button>

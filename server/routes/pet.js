@@ -248,15 +248,12 @@ pet.get('/api/:_id', (req, res) => {
       if (data) {
         res.status(200).send(data);
       }
-      // res.sendStatus(401);
     })
     .catch((err) => {
       console.error('error getting pet from api... ofCourse\n', err.response);
-      // res.sendStatus(500);
       getApiAuth()
         .then(() => axios.get(`https://api.petfinder.com/v2/animals/${_id}`))
         .then((data) => {
-          console.log('data', data);
           if (!data) {
             res.sendStatus(401);
           }

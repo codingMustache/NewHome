@@ -11,7 +11,7 @@ import {
   Grid,
 } from '@mui/material';
 import { UserContext } from '../UserContext.jsx';
-import PetList from './SavedList.jsx';
+import PetList from './List.jsx';
 // get user data using axios from google and display it on
 // this page as a restricted page
 // err takes user to login page
@@ -33,7 +33,6 @@ function Profile() {
     axios
       .get('/proAuth')
       .then(({ data }) => {
-        // console.log('data from proAuth', data);
         setUser(data);
         return data;
       })
@@ -47,9 +46,7 @@ function Profile() {
           email: data.emails[0].value,
         });
       })
-      .then(({ data }) => {
-        // console.log('inside data response from db', data);
-      })
+      .then(({ data }) => {})
       .catch((err) => {
         console.error(err);
         return navigate('/login');

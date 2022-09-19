@@ -14,10 +14,7 @@ import axios from 'axios';
 function ListEntry({ pet }) {
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    console.log('redirect to petview');
-    return navigate('/petview', { state: { animalsData: pet } });
-  };
+  const handleClick = () => navigate('/petview', { state: { animalData: pet } });
 
   return (
     <ListItem

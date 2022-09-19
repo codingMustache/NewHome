@@ -16,7 +16,6 @@ function AdoptionFeed() {
     axios
       .get('/feed/api')
       .then((data) => {
-        console.log(data);
         setAnimals(data.data);
         setFetchedAnimals(true);
       })
@@ -41,7 +40,6 @@ function AdoptionFeed() {
   updateAnimals();
 
   if (animals.length) {
-    // console.log('single animal obj', animals[0]);
     return (
       <Box>
         <Typography variant="h3">
@@ -61,7 +59,7 @@ function AdoptionFeed() {
         >
           {animals.map((animal) => (
             <Grid item key={JSON.stringify(animal)} xs={6} xl={6}>
-              <Adoption animalsData={animal} />
+              <Adoption animalData={animal} />
             </Grid>
           ))}
         </Grid>
@@ -74,8 +72,8 @@ export default AdoptionFeed;
 
 // figure out loading functionalitiy
 // put mapping through instances of entries in this function
-//  <Adoption animalsData={animals[0]} /> <br></br>
-// if animalsData (exists) return the <Adoption />
+//  <Adoption animalData={animals[0]} /> <br></br>
+// if animalData (exists) return the <Adoption />
 // else if if doesn't render loading animation from material UI
 // useEffect(() => {
 //   const getAllAnimals = function () {

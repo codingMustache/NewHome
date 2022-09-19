@@ -13,7 +13,7 @@ import {
   Typography,
 } from '@mui/material';
 import { UserContext } from '../UserContext.jsx';
-import ListEntry from './SavedListEntry.jsx';
+import ListEntry from './ListEntry.jsx';
 
 function PetList({ list }) {
   if (list === null) {
