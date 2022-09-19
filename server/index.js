@@ -52,34 +52,18 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-  // console.log('\n--------> Serialize User:');
-  // console.log(user);
-  // The USER object is the "authenticated user" from the done() in authUser function.
-  // serializeUser() will attach this user to "req.session.passport.user.{user}", so that
-  // it is tied to the session object for each session.
-
   done(null, user);
 });
-// deserialize user keeps running, in the console, should probably do something about it
+
 passport.deserializeUser((user, done) => {
-  // console.log('\n--------- Deserialized User:');
-  // console.log(user);
-  // This is the {user} that was saved in req.session.passport.user.{user} in the
-  // serializationUser()
-  // deserializeUser will attach this {user} to the "req.user.{user}", so that it
-  // can be used anywhere in the App.
-
   done(null, user);
 });
 
-// const index = '../client/dist/index.html'
 app.get('/', (req, res) => {
   res.render('index');
 });
 
-// Placeholder endpoint for adoption posts from the client
 app.post('/AdoptionMessage', (req, res) => {
-  // console.log(req.body);
   Post.create(req.body.post)
     .then()
     .catch((err) => console.error(err));
@@ -103,35 +87,12 @@ app.post('/image', (req, res) => {
   );
 });
 
-/*
-let count = 1;
-const showlogs = (req, res, next) => {
-	console.log('\n==============================');
-	console.log(`------------>  ${count++}`);
-
-	console.log(`\n req.session.passport -------> `);
-	console.log(req.session.passport);
-
-	console.log(`\n req.user -------> `);
-	console.log(req.user);
-
-	console.log('\n Session and Cookie');
-	console.log(`req.session.id -------> ${req.session.id}`);
-	console.log(`req.session.cookie -------> `);
-	console.log(req.session.cookie);
-
-	console.log('===========================================\n');
-
-	next();
-};
-
-app.use(showlogs);
-*/
 // Login start
 app.get(
   '/auth/google',
   passport.authenticate('google', { scope: ['email', 'profile'] }),
 );
+
 // on success redirects to '/' which is our login page in react
 // Login Success
 app.get(
@@ -141,6 +102,7 @@ app.get(
     failureRedirect: '/login',
   }),
 );
+
 // this is the page that gets called up on browser refresh with the google button for auth
 app.get('/login', (req, res) => {
   res.sendFile(
@@ -152,6 +114,7 @@ app.get('/login', (req, res) => {
     },
   );
 });
+
 // can use this to check status on every page request as needed
 // Use the req.isAuthenticated() function to check if user is Authenticated
 const checkAuthenticated = (req, res, next) => {
@@ -162,7 +125,6 @@ const checkAuthenticated = (req, res, next) => {
   return null;
 };
 
-// this also keeps running/getting called in the console. check on it
 app.get('/proAuth', checkAuthenticated, (req, res) => res.json(req.user));
 
 app.post('/imageUrl', (req, res) => {
@@ -185,20 +147,16 @@ app.post('/imageUrl', (req, res) => {
     }
   });
 });
-// create /isAuthenticated path for logged in status and data to pass to react side
+
+// path for logged in status
 app.get('/isAuthenticated', (req, res) => {
   if (req.isAuthenticated()) {
     return res.sendStatus(200);
   }
   return res.sendStatus(401);
 });
-// create a route in react for button to connect/call this /logout endpoint
-// Define the Logout
-// app.post('/logout', (req, res) => {
-// 	req.logOut();
-// 	res.redirect('/login');
-// 	console.log('-------> User Logged out');
-// });
+
+// logout endpoint
 app.get('/logout', (req, res) => {
   if (req.session) {
     req.session.destroy((err) => {
@@ -212,6 +170,7 @@ app.get('/logout', (req, res) => {
     res.end();
   }
 });
+
 // wildcard-catch-all
 app.get('/*', (req, res) => {
   res.sendFile(
@@ -225,5 +184,5 @@ app.get('/*', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`server totally listening @ http://${url}:${PORT}/home`);
+  console.log(`server listening @ http://${url}:${PORT}/home`);
 });

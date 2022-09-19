@@ -33,7 +33,6 @@ function Profile() {
     axios
       .get('/proAuth')
       .then(({ data }) => {
-        // console.log('data from proAuth', data);
         setUser(data);
         return data;
       })
@@ -47,9 +46,7 @@ function Profile() {
           email: data.emails[0].value,
         });
       })
-      .then(({ data }) => {
-        // console.log('inside data response from db', data);
-      })
+      .then(({ data }) => {})
       .catch((err) => {
         console.error(err);
         return navigate('/login');

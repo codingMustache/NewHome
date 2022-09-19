@@ -20,7 +20,6 @@ function Post({ post }) {
   const [rendered, setRendered] = useState(false);
   // navigate hook to render petview
   const navigate = useNavigate();
-  console.log(post);
 
   useEffect(() => {
     if (post.image) {

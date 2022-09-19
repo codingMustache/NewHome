@@ -65,14 +65,6 @@ function App() {
             onClick={handleClick}
             id="/login"
           />
-
-          {/* postforms tab is not going to exist later, currently here for testing purposes */}
-          <Tab
-            value="/postForms"
-            label="PostForms"
-            onClick={handleClick}
-            id="/postForms"
-          />
           {user ? (
             <Tab
               value="/postFeed"

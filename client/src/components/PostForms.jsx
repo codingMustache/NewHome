@@ -127,7 +127,7 @@ function PostForms({ animal }) {
       <Button
         variant="contained"
         mt={2}
-        sx={{ display: 'inline-block', margin: 'auto' }}
+        sx={{ display: 'inline-block', mx: 'auto', mt: '10px' }}
         type="submit"
       >
         Submit

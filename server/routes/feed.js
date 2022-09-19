@@ -17,43 +17,40 @@ const Pet = require('../db/models/Pet.js');
 
 // GET API page
 feed.get('/api', (req, res) => {
-  console.log('hi api');
   getPage()
     .then((page) => {
       const pets = JSON.parse(page).animals.map(
-        (animalsData) => new Pet({
-          _id: animalsData.id,
-          species: animalsData.species,
-          breed: animalsData.breeds.primary,
-          gender: animalsData.gender,
-          name: animalsData.name,
-          age: animalsData.age,
-          tags: animalsData.tags,
+        (animalData) => new Pet({
+          _id: animalData.id,
+          species: animalData.species,
+          breed: animalData.breeds.primary,
+          gender: animalData.gender,
+          name: animalData.name,
+          age: animalData.age,
+          tags: animalData.tags,
           shelterInfo: {
-            address: animalsData.contact.address,
-            email: animalsData.contact.email,
-            phone: animalsData.contact.phone,
+            address: animalData.contact.address,
+            email: animalData.contact.email,
+            phone: animalData.contact.phone,
           },
-          adopted: animalsData.status,
-          photo: animalsData.primary_photo_cropped
-            ? animalsData.primary_photo_cropped.medium
+          adopted: animalData.status,
+          photo: animalData.primary_photo_cropped
+            ? animalData.primary_photo_cropped.medium
             : null,
           userId: '',
-          link: animalsData.url,
+          link: animalData.url,
         }),
       );
       pets.forEach((pet) => {
         Pet.find({ _id: pet._id })
           .then((pets1) => {
             if (pets1.length) {
-
             } else {
               pet.save();
             }
           })
           .catch((err) => console.error(err));
       });
-      console.log(pets);
       res.send(pets);
     })
     .catch((err) => {
@@ -62,39 +59,37 @@ feed.get('/api', (req, res) => {
           .then(() => getPage())
           .then((page) => {
             const pets = JSON.parse(page).animals.map(
-              (animalsData) => new Pet({
-                _id: animalsData.id,
-                species: animalsData.species,
-                breed: animalsData.breeds.primary,
-                gender: animalsData.gender,
-                name: animalsData.name,
-                age: animalsData.age,
-                tags: animalsData.tags,
+              (animalData) => new Pet({
+                _id: animalData.id,
+                species: animalData.species,
+                breed: animalData.breeds.primary,
+                gender: animalData.gender,
+                name: animalData.name,
+                age: animalData.age,
+                tags: animalData.tags,
                 shelterInfo: {
-                  address: animalsData.contact.address,
-                  email: animalsData.contact.email,
-                  phone: animalsData.contact.phone,
+                  address: animalData.contact.address,
+                  email: animalData.contact.email,
+                  phone: animalData.contact.phone,
                 },
-                adopted: animalsData.status,
-                photo: animalsData.primary_photo_cropped
-                  ? animalsData.primary_photo_cropped.medium
+                adopted: animalData.status,
+                photo: animalData.primary_photo_cropped
+                  ? animalData.primary_photo_cropped.medium
                   : null,
                 userId: '',
-                link: animalsData.url,
+                link: animalData.url,
               }),
             );
             pets.forEach((pet) => {
               Pet.find({ _id: pet._id })
                 .then((pets1) => {
                   if (pets1.length) {
-
                   } else {
                     pet.save();
                   }
                 })
                 .catch((err) => console.error(err));
             });
-            console.log(pets);
             res.send(pets);
           })
           .catch((err) => {

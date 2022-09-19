@@ -83,7 +83,7 @@ function Search() {
     >
       {pets.map((animal) => (
         <Grid item key={JSON.stringify(animal)} xs={6} xl={6}>
-          <Adoption animalsData={animal} />
+          <Adoption animalData={animal} />
         </Grid>
       ))}
     </Grid>
