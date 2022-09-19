@@ -20,24 +20,8 @@ function Post({ post }) {
   const [rendered, setRendered] = useState(false);
   // navigate hook to render petview
   const navigate = useNavigate();
+  console.log(post);
 
-  // on click render individual petview
-  const handleEntryClick = () => {
-    const config = {
-      method: 'post',
-      url: 'http://localhost:8080/feed/post/pet',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: { _id: post.petId },
-    };
-    axios(config)
-      .then((pet) => navigate('/petview', { state: { animalsData: pet } }))
-      .catch((err) => {
-        console.error(err);
-      });
-    // navigate tag to render petview
-  };
   useEffect(() => {
     if (post.image) {
       axios
@@ -75,16 +59,6 @@ function Post({ post }) {
         </Typography>
         <Typography variant="body2">{post.message}</Typography>
       </CardContent>
-      <CardActions style={{ backgroundColor: '#A64B2A' }}>
-        <Button
-          style={{ backgroundColor: '#FCFFE7', color: '#DEA057' }}
-          size="small"
-          id="viewpet"
-          onClick={handleEntryClick}
-        >
-          view pet
-        </Button>
-      </CardActions>
     </Card>
   );
 }

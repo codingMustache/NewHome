@@ -7,27 +7,28 @@ import { Box, Button, Grid } from '@mui/material';
 // goes to the google auth page to give user option to sign in with their google account
 function Login() {
   return (
-    <Grid container xs={4}>
+    <Grid container xs={4} justifyContent="space-between">
       <Grid item xs={4}>
         <h1>Sign in</h1>
         <Button
           variant="contained"
           mt={2}
           sx={{ display: 'inline-block', margin: 'auto' }}
-          href="/login"
+          href="/auth/google"
         >
-          <a href="/auth/google">Sign In</a>
+          {' '}
+          Sign In
         </Button>
       </Grid>
-      <Grid>
+      <Grid item xs={3}>
         <h1>Sign Up</h1>
         <Button
           variant="contained"
           mt={2}
           sx={{ display: 'inline-block', margin: 'auto' }}
-          href="/login"
+          href="/auth/google"
         >
-          <a href="/auth/google">Sign Up</a>
+          Sign Up
         </Button>
       </Grid>
     </Grid>

@@ -24,7 +24,7 @@ function PetList({ list }) {
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
       {list.map((item) => (
         <span>
-          <ListEntry key={`${item.petId}`} pet={item} />
+          <ListEntry key={`${item._id}`} pet={item} />
           <Divider variant="inset" component="li" />
         </span>
       ))}

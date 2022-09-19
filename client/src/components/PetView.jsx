@@ -14,19 +14,20 @@ import {
   ListItemEntry,
 } from '@mui/material';
 import { UserContext } from '../UserContext.jsx';
-import { styles } from '../styles.jsx';
+import PostForms from './PostForms.jsx';
 
 // default image, remove later
 const image =	'https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/57334144/1/?bust=1663026743&width=300';
 
 function PetView() {
-  const { user, savedList, setSavedList } = useContext(UserContext);
+  const { user, setSavedList, setFollowedList } = useContext(UserContext);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [adoptedByUser, setAdoptedByUser] = useState(false);
 
   // state from feed component
   const { state } = useLocation();
   const animal = state.animalsData;
-  const [status, setStatus] = useState(animal.status);
+  const [status, setStatus] = useState(animal.adopted);
 
   // function to save/follow a pet
   const handleSavePet = (e) => {
@@ -36,28 +37,11 @@ function PetView() {
       window.alert('Please sign up/login');
     } else if (e.target.id === 'save') {
       // axios request for favoriting a pet
-      const photo = animal.primary_photo_cropped
-        ? animal.primary_photo_cropped.small
-        : null;
+      const photo = animal.photo ? animal.photo : null;
+      animal.userId = user.id;
       axios
         .post('/pet/savePet', {
-          pet: {
-            petId: animal.id,
-            species: animal.species,
-            breed: animal.breeds.primary,
-            gender: animal.gender,
-            name: animal.name,
-            age: animal.age,
-            tags: animal.tags,
-            shelterInfo: {
-              address: animal.contact.address,
-              email: animal.contact.email,
-              phone: animal.contact.phone,
-            },
-            adopted: animal.status,
-            photo,
-            userId: user.id,
-          },
+          pet: animal,
         })
         .then((data) => {
           axios
@@ -74,6 +58,25 @@ function PetView() {
         });
     } else {
       // axios request for following a pet story
+      const photo = animal.photo ? animal.photo : null;
+      animal.userId = user.id;
+      axios
+        .post('/pet/followPet', {
+          pet: animal,
+        })
+        .then((data) => {
+          axios
+            .get(`/pet/followPet/${user.id}`)
+            .then(({ data }) => {
+              setFollowedList(data);
+            })
+            .catch((err) => {
+              console.error('error updating pet list\n', err);
+            });
+        })
+        .catch((err) => {
+          console.error('error on /pet/savePet req', err);
+        });
     }
   };
 
@@ -108,10 +111,10 @@ function PetView() {
 
   // render pet photo or a generic photo
   const hasPhoto = () => {
-    if (animal.photos.length) {
-      return animal.photos[0].medium;
+    if (animal.photo) {
+      return animal.photo;
     }
-    return image;
+    return null;
   };
 
   // render pet tags, or generic statement
@@ -134,8 +137,9 @@ function PetView() {
       return;
     }
     setStatus('adopted');
+    setAdoptedByUser(true);
     axios
-      .put(`/pet/${animal.id}`, {
+      .put(`/pet/${animal._id}`, {
         pet: {
           userId: user.id,
           adopted: 'adopted',
@@ -157,7 +161,11 @@ function PetView() {
     }
   }, [loggedIn]);
 
-  useEffect(() => {}, [status]);
+  useEffect(() => {
+    if (user.id === animal.userId) {
+      setAdoptedByUser(true);
+    }
+  }, [status]);
 
   return (
     <Box
@@ -178,7 +186,7 @@ function PetView() {
             {`Species: ${animal.species}`}
           </Typography>
           <Typography variant="body2" gutterBottom sx={{ color: '#5D473D' }}>
-            {`Breed: ${animal.breeds.primary}`}
+            {`Breed: ${animal.breed}`}
           </Typography>
           <Typography variant="body2" gutterBottom sx={{ color: '#5D473D' }}>
             {`Age: ${animal.age}`}
@@ -200,9 +208,19 @@ function PetView() {
         >
           {onAdoptionStatus()}
           {status === 'adoptable' ? (
-            <Button onClick={handleAdoption} variant="contained">
-              Adopt Me!
-            </Button>
+					  user ? (
+  <Button
+    onClick={handleAdoption}
+    variant="contained"
+    href={animal.url}
+  >
+    Adopt Me!
+  </Button>
+					  ) : (
+  <Button disabled="true" variant="contained">
+    Adopt Me!
+  </Button>
+					  )
           ) : (
             <Button variant="contained" disabled="true">
               Adopted
@@ -210,6 +228,11 @@ function PetView() {
           )}
         </CardActions>
       </Card>
+      {adoptedByUser ? (
+        <Box>
+          <PostForms animal={animal} />
+        </Box>
+      ) : null}
     </Box>
   );
 }

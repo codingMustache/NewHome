@@ -12,17 +12,90 @@ const { API_KEY, API_SECRET } = process.env;
 
 const feed = express.Router();
 const Post = require('../db/models/Post.js');
+const Follower = require('../db/models/Follower.js');
+const Pet = require('../db/models/Pet.js');
 
 // GET API page
 feed.get('/api', (req, res) => {
+  console.log('hi api');
   getPage()
-    .then((page) => res.send(page))
+    .then((page) => {
+      const pets = JSON.parse(page).animals.map(
+        (animalsData) => new Pet({
+          _id: animalsData.id,
+          species: animalsData.species,
+          breed: animalsData.breeds.primary,
+          gender: animalsData.gender,
+          name: animalsData.name,
+          age: animalsData.age,
+          tags: animalsData.tags,
+          shelterInfo: {
+            address: animalsData.contact.address,
+            email: animalsData.contact.email,
+            phone: animalsData.contact.phone,
+          },
+          adopted: animalsData.status,
+          photo: animalsData.primary_photo_cropped
+            ? animalsData.primary_photo_cropped.medium
+            : null,
+          userId: '',
+          link: animalsData.url,
+        }),
+      );
+      pets.forEach((pet) => {
+        Pet.find({ _id: pet._id })
+          .then((pets1) => {
+            if (pets1.length) {
+
+            } else {
+              pet.save();
+            }
+          })
+          .catch((err) => console.error(err));
+      });
+      console.log(pets);
+      res.send(pets);
+    })
     .catch((err) => {
       if (err.response.status === 401) {
         getApiAuth()
           .then(() => getPage())
           .then((page) => {
-            res.send(page);
+            const pets = JSON.parse(page).animals.map(
+              (animalsData) => new Pet({
+                _id: animalsData.id,
+                species: animalsData.species,
+                breed: animalsData.breeds.primary,
+                gender: animalsData.gender,
+                name: animalsData.name,
+                age: animalsData.age,
+                tags: animalsData.tags,
+                shelterInfo: {
+                  address: animalsData.contact.address,
+                  email: animalsData.contact.email,
+                  phone: animalsData.contact.phone,
+                },
+                adopted: animalsData.status,
+                photo: animalsData.primary_photo_cropped
+                  ? animalsData.primary_photo_cropped.medium
+                  : null,
+                userId: '',
+                link: animalsData.url,
+              }),
+            );
+            pets.forEach((pet) => {
+              Pet.find({ _id: pet._id })
+                .then((pets1) => {
+                  if (pets1.length) {
+
+                  } else {
+                    pet.save();
+                  }
+                })
+                .catch((err) => console.error(err));
+            });
+            console.log(pets);
+            res.send(pets);
           })
           .catch((err) => {
             console.error(err);
@@ -34,13 +107,38 @@ feed.get('/api', (req, res) => {
     });
 });
 
-feed.get('/posts', (req, res) => {
-  Post.find({})
-    .then((posts) => {
-      res.status(200).send(posts);
+feed.get('/posts/:userId', (req, res) => {
+  const { userId } = req.params;
+  Follower.find({ userId })
+    .then((savedList) => {
+      if (!savedList.length) {
+        res.sendStatus(404);
+      }
+      // if no list respond with 404
+      return savedList;
     })
-    .catch(() => {
-      res.sendStatus(500);
+    .then((savedList) => {
+      const pets = savedList.map(async ({ _id }) => {
+        try {
+          return await Post.find({ _id });
+        } catch (err) {
+          console.error('error 1 here\n', err);
+        }
+      });
+
+      return pets;
+    })
+    .then(async (pets) => {
+      try {
+        const results = await Promise.resolve(Promise.all(pets));
+
+        res.status(200).send(results);
+      } catch (err) {
+        console.error('my dreams are now nightmares\n', err);
+      }
+    })
+    .catch((err) => {
+      console.error(' error on finding savedPets\n', err);
     });
 });
 

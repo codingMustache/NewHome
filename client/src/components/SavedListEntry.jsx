@@ -16,19 +16,16 @@ function ListEntry({ pet }) {
 
   const handleClick = () => {
     console.log('redirect to petview');
-    axios
-      .get(`/pet/api/${pet.petId}`)
-      .then((data) => {
-        console.log('data from api hopefully\n', data);
-      })
-      .catch((err) => {
-        console.error('error getting pet from api\n', err);
-      });
-    // return navigate('/petview', { state: { animalsData: pet } })
+    return navigate('/petview', { state: { animalsData: pet } });
   };
 
   return (
-    <ListItem alignItems="flex-start" onClick={(e) => {}}>
+    <ListItem
+      alignItems="flex-start"
+      onClick={(e) => {
+			  handleClick();
+      }}
+    >
       <ListItemAvatar>
         <Avatar alt="" src={pet.photo ? pet.photo : null} />
       </ListItemAvatar>

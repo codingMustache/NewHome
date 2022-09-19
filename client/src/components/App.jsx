@@ -1,10 +1,11 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
   Link, useNavigate, Outlet, useLocation,
 } from 'react-router-dom';
 import { Box, Tabs, Tab } from '@mui/material';
 import { styles } from '../styles.jsx';
+import { UserContext } from '../UserContext.jsx';
 
 // axios get to get the authenticated page from the
 // isAuthenticated route in the server then navigates to the react page 'profile'
@@ -13,6 +14,7 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation().pathname;
   const [value, setVal] = useState(() => location);
+  const { user } = useContext(UserContext);
 
   const handleChange = (event, newValue) => {
     setVal(newValue);
@@ -71,12 +73,14 @@ function App() {
             onClick={handleClick}
             id="/postForms"
           />
-          <Tab
-            value="/postFeed"
-            label="Stories"
-            onClick={handleClick}
-            id="/postFeed"
-          />
+          {user ? (
+            <Tab
+              value="/postFeed"
+              label="Stories"
+              onClick={handleClick}
+              id="/postFeed"
+            />
+          ) : null}
         </Tabs>
       </Box>
       <br />

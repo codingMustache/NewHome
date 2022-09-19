@@ -4,6 +4,7 @@ const axios = require('axios');
 const pet = express.Router();
 const Pet = require('../db/models/Pet.js');
 const SavedPet = require('../db/models/SavedPet.js');
+const Follower = require('../db/models/Follower.js');
 
 const { API_KEY, API_SECRET } = process.env;
 
@@ -14,7 +15,7 @@ pet.post('/savePet', (req, res) => {
   pet.userId = 'none';
 
   // check if pet is in database
-  Pet.find({ petId: pet.petId })
+  Pet.find({ _id: pet._id })
     .then((data) => {
       // save pet to db Pet collection
       if (!data.length) {
@@ -28,7 +29,7 @@ pet.post('/savePet', (req, res) => {
     })
     .then(() => SavedPet.find({
       userId,
-      petId: pet.petId,
+      _id: pet._id,
     }))
     .catch((err) => {
       console.error('error in pet.create\n', err);
@@ -40,7 +41,7 @@ pet.post('/savePet', (req, res) => {
         // create user/pet SavedPet
         return SavedPet.create({
           userId,
-          petId: pet.petId,
+          _id: pet._id,
         });
       }
       // if found move on/handle sending back error res
@@ -73,9 +74,9 @@ pet.get('/savePet/:userId', (req, res) => {
       return savedList;
     })
     .then((savedList) => {
-      const pets = savedList.map(async ({ petId }) => {
+      const pets = savedList.map(async ({ _id }) => {
         try {
-          return await Pet.findOne({ petId });
+          return await Pet.findOne({ _id });
         } catch (err) {
           console.error('error 1 here\n', err);
         }
@@ -100,15 +101,113 @@ pet.get('/savePet/:userId', (req, res) => {
   // return array of animal objects back
 });
 
-// update pet status to adopted
-pet.put('/:petId', (req, res) => {
-  // take in userId and petId
+pet.post('/followPet', (req, res) => {
+  // log body provided by client
   const { pet } = req.body;
-  let { petId } = req.params;
-  petId = Number(petId);
+  const { userId } = pet;
+  pet.userId = 'none';
+
+  // check if pet is in database
+  Pet.find({ _id: pet._id })
+    .then((data) => {
+      // save pet to db Pet collection
+      if (!data.length) {
+        return Pet.create(pet);
+      }
+      // *if found move on without saving
+    })
+    .catch((err) => {
+      console.error('error on Pet.find\n', err);
+      res.sendStatus(500);
+    })
+    .then(() => Follower.find({
+      userId,
+      _id: pet._id,
+    }))
+    .catch((err) => {
+      console.error('error in pet.create\n', err);
+      res.sendStatus(500);
+    })
+    .then((data) => {
+      // then check saved pet documents for previous save
+      if (!data.length) {
+        // create user/pet SavedPet
+        return Follower.create({
+          userId,
+          _id: pet._id,
+        });
+      }
+      // if found move on/handle sending back error res
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.error('error on SavedPet.find\n', err);
+      res.sendStatus(500);
+    })
+    .then(() => {
+      // everybody rest
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.error('error on create savedpet\n', err);
+      res.sendStatus(500);
+    });
+});
+
+pet.get('/followPet/:userId', (req, res) => {
+  const { userId } = req.params;
+  // get list by user id
+  Follower.find({ userId })
+    .then((savedList) => {
+      if (!savedList.length) {
+        res.sendStatus(404);
+      }
+      // if no list respond with 404
+      return savedList;
+    })
+    .then((savedList) => {
+      const pets = savedList.map(async ({ _id }) => {
+        try {
+          return await Pet.findOne({ _id });
+        } catch (err) {
+          console.error('error 1 here\n', err);
+        }
+      });
+
+      return pets;
+    })
+    .then(async (pets) => {
+      try {
+        const results = await Promise.resolve(Promise.all(pets));
+
+        res.status(200).send(results);
+      } catch (err) {
+        console.error('my dreams are now nightmares\n', err);
+      }
+    })
+    .catch((err) => {
+      console.error(' error on finding savedPets\n', err);
+    });
+});
+
+pet.get('/adoptpet/:userId', (req, res) => {
+  const { userId } = req.params;
+  Pet.find({ userId })
+    .then((pets) => {
+      res.status(200).send(pets);
+    })
+    .catch(() => res.sendStatus(500));
+});
+
+// update pet status to adopted
+pet.put('/:_id', (req, res) => {
+  // take in userId and _id
+  const { pet } = req.body;
+  let { _id } = req.params;
+  _id = Number(_id);
 
   // Pet model method to findOneandUpdate
-  return Pet.findOneAndUpdate({ petId }, pet, {
+  return Pet.findOneAndUpdate({ _id }, pet, {
     returnDocument: 'after',
   })
     .then((data) => {
@@ -122,11 +221,11 @@ pet.put('/:petId', (req, res) => {
     });
 });
 
-pet.get('/:petId', (req, res) => {
+pet.get('/:_id', (req, res) => {
   // find One pet
   // return it's information
-  const { petId } = req.params;
-  Pet.findOne(petId)
+  const { _id } = req.params;
+  Pet.findOne(_id)
     .then((data) => {
       if (data) {
         res.status(201).send(data);
@@ -139,12 +238,12 @@ pet.get('/:petId', (req, res) => {
     });
 });
 
-pet.get('/api/:petId', (req, res) => {
-  let { petId } = req.params;
-  petId = Number(petId);
+pet.get('/api/:_id', (req, res) => {
+  let { _id } = req.params;
+  _id = Number(_id);
 
   return axios
-    .get(`https://api.petfinder.com/v2/animals/${petId}`)
+    .get(`https://api.petfinder.com/v2/animals/${_id}`)
     .then((data) => {
       if (data) {
         res.status(200).send(data);
@@ -155,7 +254,7 @@ pet.get('/api/:petId', (req, res) => {
       console.error('error getting pet from api... ofCourse\n', err.response);
       // res.sendStatus(500);
       getApiAuth()
-        .then(() => axios.get(`https://api.petfinder.com/v2/animals/${petId}`))
+        .then(() => axios.get(`https://api.petfinder.com/v2/animals/${_id}`))
         .then((data) => {
           console.log('data', data);
           if (!data) {
