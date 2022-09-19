@@ -55,7 +55,7 @@ function Search() {
     setSearch(searchBy);
     const config = {
       method: 'post',
-      url: 'http://localhost:8080/feed/api/search',
+      url: 'http://ec2-34-220-123-77.us-west-2.compute.amazonaws.com:8080/feed/api/search',
       headers: {
         'Content-Type': 'application/json',
       },
