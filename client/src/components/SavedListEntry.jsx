@@ -35,17 +35,15 @@ function ListEntry({ pet }) {
       <ListItemText
         primary={`${pet.name}`}
         secondary={(
-          <>
-            <Typography
-              sx={{ display: 'inline' }}
-              component="span"
-              variant="body2"
-              color="text.primary"
-            >
-              {`${pet.species}`}
-            </Typography>
+          <Typography
+            sx={{ display: 'inline' }}
+            component="span"
+            variant="body2"
+            color="#EEE3CB"
+          >
+            {`${pet.species}`}
             {` — Breed: ${pet.breed}  Age: ${pet.age}`}
-          </>
+          </Typography>
    )}
       />
     </ListItem>

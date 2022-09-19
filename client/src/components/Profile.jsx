@@ -75,11 +75,11 @@ function Profile() {
     return <h3>Must Sign In</h3>;
   }
   return (
-    <Grid container>
+    <Grid container spacing={2}>
       <Grid item>
-        <Card raised sx={{ width: '40vw' }}>
+        <Card raised sx={{ width: '15vw' }}>
           <CardMedia component="img" src={user.picture} alt="" />
-          <CardContent>
+          <CardContent sx={{ bgcolor: '#E3C770' }}>
             <Typography gutterBottom variant="h5" component="div">
               {user.given_name}
             </Typography>
@@ -97,7 +97,7 @@ function Profile() {
           </CardContent>
         </Card>
       </Grid>
-      <Grid>
+      <Grid item>
         <PetList list={savedList} />
       </Grid>
       {/* <Grid>
