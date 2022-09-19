@@ -15,16 +15,15 @@ function AdoptionFeed() {
   useEffect(() => {
     axios
       .get('/feed/api')
-      .then(({ data }) => {
-        setAnimals(data.animals);
-      })
-      .then(() => {
+      .then((data) => {
+        console.log(data);
+        setAnimals(data.data);
         setFetchedAnimals(true);
       })
       .catch((err) => {
         console.error(err);
       });
-  }, [fetchedAnimals]);
+  }, []);
 
   const updateAnimals = () => {
     setTimeout(() => {

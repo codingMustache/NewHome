@@ -17,10 +17,7 @@ const userSchema = new Schema({
 });
 
 const petSchema = new Schema({
-  petId: {
-    type: Number,
-    unique: true,
-  },
+  _id: Number,
   species: String,
   breed: String,
   gender: String,
@@ -31,6 +28,8 @@ const petSchema = new Schema({
   adopted: String,
   photo: String,
   userId: String,
+  description: String,
+  link: String,
 });
 
 const postSchema = new Schema({
@@ -38,18 +37,18 @@ const postSchema = new Schema({
   message: String,
   image: String,
   imageType: String,
-  petId: String,
+  _id: Number,
   date: { type: Date, default: Date.now },
 });
 
 const followersSchema = new Schema({
   userId: String,
-  petId: String,
+  _id: Number,
 });
 
 const savedPetSchema = new Schema({
   userId: String,
-  petId: Number,
+  _id: Number,
 });
 
 module.exports = {

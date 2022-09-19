@@ -96,6 +96,8 @@ const styles = {
     mx: 'auto',
     mb: '20px',
     // mt: '20px',
+    borderStyle: 'solid',
+    borderWidth: '1px',
     borderRadius: '10px',
   },
   '& .MuiTypography-h5': {},
@@ -125,7 +127,9 @@ const styles = {
   // & .Mui-selected styles the currently selected tab of a tabs group
   '& .MuiTabs-root': {
     bgcolor: theme.palette.secondary.dark,
-    'border-radius': '5px',
+    borderStyle: 'solid',
+    borderWidth: '1px',
+    borderRadius: '5px',
     // m: 'auto',
     // 'margin-left': 'auto', 'margin-right': 'auto',
     display: 'inline-flex',

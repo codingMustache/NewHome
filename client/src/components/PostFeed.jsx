@@ -1,33 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Box, Typography, Grid } from '@mui/material';
 import Post from './Post.jsx';
 import Loading from './Loading.jsx';
+import { UserContext } from '../UserContext.jsx';
 
 function PostFeed() {
   const [posts, setPosts] = useState([]);
   const [rendered, setRendered] = useState(false);
+  const { user } = useContext(UserContext);
   useEffect(() => {
-    axios
-      .get('/feed/posts')
-      .then(({ data: posts }) => {
-        console.log(posts);
-        setPosts(posts);
-      })
-      .then(() => {
-        setRendered(true);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    if (user) {
+      axios
+        .get(`/feed/posts/${user.id}`)
+        .then(({ data: posts }) => {
+          console.log(posts);
+          setPosts(posts.flat());
+        })
+        .then(() => {
+          setRendered(true);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   }, [rendered]);
 
   const updatePosts = () => {
     setTimeout(() => {
       axios
-        .get('/feed/posts')
-        .then(({ data }) => {
-          setPosts(data.posts);
+        .get(`/feed/posts${user.id}`)
+        .then(({ data: posts }) => {
+          setPosts(posts.flat());
           updatePosts();
         })
         .catch((err) => {

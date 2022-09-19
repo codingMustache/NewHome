@@ -47,7 +47,7 @@ function Adoption({ animalsData }) {
       .delete('/pet/savePet', {
         data: {
           userId: user.id,
-          petId: animalsData.id,
+          _id: animalsData._id,
         },
       })
       .then((data) => {
@@ -59,10 +59,10 @@ function Adoption({ animalsData }) {
   };
 
   const handleSavePet = (e) => {
-    console.log('inside handleSavePet', animalsData.id);
+    console.log('inside handleSavePet', animalsData._id);
     setClick(() => {
       const afterClicked = isClicked;
-      afterClicked.push(animalsData.id);
+      afterClicked.push(animalsData._id);
       return afterClicked;
     });
 
@@ -74,29 +74,10 @@ function Adoption({ animalsData }) {
     } else {
       console.log(user);
       // axios request for favoriting a pet
-
-      const photo = animalsData.primary_photo_cropped
-        ? animalsData.primary_photo_cropped.small
-        : null;
+      animalsData.userId = user.id;
       axios
         .post('/pet/savePet', {
-          pet: {
-            petId: animalsData.id,
-            species: animalsData.species,
-            breed: animalsData.breeds.primary,
-            gender: animalsData.gender,
-            name: animalsData.name,
-            age: animalsData.age,
-            tags: animalsData.tags,
-            shelterInfo: {
-              address: animalsData.contact.address,
-              email: animalsData.contact.email,
-              phone: animalsData.contact.phone,
-            },
-            adopted: animalsData.status,
-            photo,
-            userId: user.id,
-          },
+          pet: animalsData,
         })
         .then((data) => {
           console.log('data from pet/savePet', data);
@@ -124,7 +105,7 @@ function Adoption({ animalsData }) {
   useEffect(() => {
     if (savedList !== null) {
       savedList.forEach((savedPet) => {
-        if (savedPet.petId === animalsData.id) {
+        if (savedPet._id === animalsData._id) {
           setThere(true);
         }
       });
@@ -134,14 +115,8 @@ function Adoption({ animalsData }) {
   return (
     <Card raised sx={{ width: '40vw' }}>
       {(() => {
-			  if (animalsData.photos.length) {
-			    return (
-  <CardMedia
-    component="img"
-    image={animalsData.photos[0].medium}
-    alt=""
-  />
-			    );
+			  if (animalsData.photo) {
+			    return <CardMedia component="img" image={animalsData.photo} alt="" />;
 			  }
       })()}
 
@@ -162,18 +137,32 @@ function Adoption({ animalsData }) {
         >
           view more
         </Button>
-        {isThere ? (
-          <IconButton
-            id="save"
-            aria-label="add to favorites"
-            onClick={(e) => {
-						  handleUnsave(e);
-            }}
-          >
-            <FavoriteIcon style={{ color: 'purple' }} size="small" />
-          </IconButton>
+        {user ? (
+				  isThere ? (
+  <IconButton
+    id="save"
+    aria-label="add to favorites"
+    onClick={(e) => {
+							  handleUnsave(e);
+    }}
+  >
+    <FavoriteIcon style={{ color: 'purple' }} size="small" />
+  </IconButton>
+				  ) : (
+  <IconButton
+    id="save"
+    aria-label="add to favorites"
+    onClick={(e) => {
+							  // handleUnsave();
+							  handleSavePet(e);
+    }}
+  >
+    <FavoriteIcon style={{ color: '#DEA057' }} size="small" />
+  </IconButton>
+				  )
         ) : (
           <IconButton
+            disabled="true"
             id="save"
             aria-label="add to favorites"
             onClick={(e) => {

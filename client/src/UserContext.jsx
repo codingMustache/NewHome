@@ -8,7 +8,7 @@ function UserContextProvider({ children }) {
   // useState to set variables and updateVariables
   const [user, setUser] = useState(null);
   const [savedList, setSavedList] = useState(null);
-  const [postList, setPostList] = useState(null);
+  const [followedList, setFollowedList] = useState(null);
   const [isClicked, setClick] = useState([]);
   const [search, setSearch] = useState(null);
   const userValue = useMemo(
@@ -17,14 +17,14 @@ function UserContextProvider({ children }) {
       setUser,
       savedList,
       setSavedList,
-      postList,
-      setPostList,
+      followedList,
+      setFollowedList,
       search,
       setSearch,
       isClicked,
       setClick,
     }),
-    [user, savedList, postList, search, isClicked],
+    [user, savedList, followedList, search, isClicked],
   );
   return (
     <UserContext.Provider value={userValue}>{children}</UserContext.Provider>

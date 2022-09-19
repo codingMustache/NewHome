@@ -17,9 +17,15 @@ import PetList from './SavedList.jsx';
 // err takes user to login page
 function Profile() {
   const {
-    user, setUser, savedList, setSavedList,
+    user,
+    setUser,
+    savedList,
+    setSavedList,
+    followedList,
+    setFollowedList,
   } = useContext(UserContext);
   const [haveUser, setHaveUser] = useState(false);
+  const [adoptedList, setAdoptedList] = useState([]);
 
   const navigate = useNavigate();
 
@@ -53,6 +59,22 @@ function Profile() {
         .get(`/pet/savePet/${user.id}`)
         .then(({ data }) => {
           setSavedList(data);
+        })
+        .catch((err) => {
+          console.error('error on get/pet/savePet\n', err);
+        });
+      axios
+        .get(`/pet/followPet/${user.id}`)
+        .then(({ data }) => {
+          setFollowedList(data);
+        })
+        .catch((err) => {
+          console.error('error on get/pet/savePet\n', err);
+        });
+      axios
+        .get(`/pet/adoptPet/${user.id}`)
+        .then(({ data }) => {
+          setAdoptedList(data);
         })
         .catch((err) => {
           console.error('error on get/pet/savePet\n', err);
@@ -98,14 +120,35 @@ function Profile() {
         </Card>
       </Grid>
       <Grid item>
+        <Typography
+          gutterBottom
+          variant="h5"
+          sx={{ display: 'flex', justifyContent: 'center' }}
+        >
+          Saved
+        </Typography>
         <PetList list={savedList} />
       </Grid>
-      {/* <Grid>
-				<PetList list={followedList} />
-			</Grid>
-			<Grid>
-				<PetList list={adoptedList} />
-			</Grid> */}
+      <Grid item>
+        <Typography
+          gutterBottom
+          variant="h5"
+          sx={{ display: 'flex', justifyContent: 'center' }}
+        >
+          Followed
+        </Typography>
+        <PetList list={followedList} />
+      </Grid>
+      <Grid item>
+        <Typography
+          gutterBottom
+          variant="h5"
+          sx={{ display: 'flex', justifyContent: 'center' }}
+        >
+          Adopted
+        </Typography>
+        {adoptedList.length ? <PetList list={adoptedList} /> : null}
+      </Grid>
     </Grid>
   );
 }
