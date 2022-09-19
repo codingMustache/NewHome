@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 
-function SavedListEntry({ pet, user }) {
+function ListEntry({ pet }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -52,4 +52,4 @@ function SavedListEntry({ pet, user }) {
   );
 }
 
-export default SavedListEntry;
+export default ListEntry;

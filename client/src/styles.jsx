@@ -66,8 +66,12 @@ const theme = createTheme({
 
 const styles = {
   '& .MuiCard-root': {},
-  '& .MuiCardActions-root': {},
-  '& .MuiCardContent-root': {},
+  '& .MuiCardActions-root': {
+    bgcolor: '#A64B2A',
+  },
+  '& .MuiCardContent-root': {
+    bgcolor: '#E3C770',
+  },
   '& .MuiCardMedia-root': {},
   '& .MuiButton-root': {
     color: theme.palette.primary.contrastText,

@@ -13,24 +13,18 @@ import {
   Typography,
 } from '@mui/material';
 import { UserContext } from '../UserContext.jsx';
-import SavedListEntry from './SavedListEntry.jsx';
+import ListEntry from './SavedListEntry.jsx';
 
-function SavedList() {
-  const { user, savedList } = useContext(UserContext);
-
-  if (savedList === null) {
+function PetList({ list }) {
+  if (list === null) {
     return <div>Saved Pets go here</div>;
   }
 
   return (
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      {savedList.map((item) => (
+      {list.map((item) => (
         <span>
-          <SavedListEntry
-            key={`${item.petId}`}
-            pet={item}
-            user={user}
-          />
+          <ListEntry key={`${item.petId}`} pet={item} />
           <Divider variant="inset" component="li" />
         </span>
       ))}
@@ -38,7 +32,7 @@ function SavedList() {
   );
 }
 
-export default SavedList;
+export default PetList;
 
 //  <ListItem alignItems="flex-start">
 //         <ListItemAvatar>
