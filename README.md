@@ -43,19 +43,19 @@ To start the application you will need to take the following steps:
 
  ### PetView.jsx:
 
-  * This component will render the full view of the pet 
+  * This component will render the full view of the single focused pet that is clicked where you will be able view more information about the pet, save the pet, as well as the option to adopt the pet as well
   
  ### Post.jsx:
 
-  * something
+  * This component will render the posts from a user regarding a pet they have adopted, with the option to click on the post to see more about the pet.
  
  ### PostFeed.jsx:
 
-  * something
+  * This component will render a list of Post components in a single column.
 
  ### PostForms.jsx:
 
-  * something
+  * This component will render and recieve the user inputs to create a post regarding a pet they have adopted.
 
 ### Profile.jsx:
 
@@ -70,7 +70,7 @@ To start the application you will need to take the following steps:
 ### Search.jsx:
 
   * Here you can search for different pets by your specifications! You can search by breed, by animal type, by hair length, size, and gender!
-  * This component will render a sea
+  * This component will render a list of animals that meet these specifications, and will give you the ability to view more and focus on a specific animal that a user is interested in
 
 <h1>
 <h1>
@@ -101,23 +101,23 @@ To start the application you will need to take the following steps:
 
   ### Follower.js: 
 
-  * something
+  * Creates and exports the Follower mongoose model.
 
   ### Pet.js: 
 
-  * something
+  * Creates the model for the Pet model based off of the schema wich will export the Pet that is being used/ manipulated in the database
 
   ### Post.js: 
 
-  * something
+  * Creates and exports the Post mongoose model.
 
   ### SavedPet.js: 
 
-  * something
+  * Creates and exports the SavedPet mongoose model.
 
   ### User.js: 
 
-  * something
+  * Creates and exports the User mongoose model.
   <h1>
 
 ## Within the `db/routes` directory:
@@ -128,11 +128,11 @@ To start the application you will need to take the following steps:
 
   ### feed.js: 
 
-  * something
+  *  Handles api request and DB request helper function to get api page, handles options for search, if theres a fail then helper to get api authorization then runs helper function to get api page.
 
   ### pet.js: 
 
-  * something 
+  * Contains the endpoints related to accessing and manipulating pets in the database and from the api. 
 
   ### user.js: 
 
@@ -178,19 +178,19 @@ To start the application you will need to take the following steps:
 
    ### .eslintrc.json:
     
-   * something
+   * This is the file where the actual rulings for eslint exists, some 'best practices' are disabled for usability purposes since some files need to be written a certain way, in which eslint doens't "like"
 
    ### .eslintignore: 
   
-  * something
+  * this file references the neccesarry file paths for eslint to ignore entirely 
 
    ### .prettierignore: 
 
-   * something
+   * Similar to eslint, this file will contain styled rulings for the overall syntax of the project, which will handle any formatting issues that it deems appropriate to interpret in such a way. 
 
    ### .prettierrc: 
 
-   * something
+   * Contains the rules for how prettier will style and format the code.
 
    <h1>
   <h1>
