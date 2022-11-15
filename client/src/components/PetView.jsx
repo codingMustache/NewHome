@@ -145,15 +145,12 @@ function PetView() {
           adopted: 'adopted',
         },
       })
-      .then((data) => {})
       .catch((err) => {
         console.error('error updating pet from client req\n', err);
       });
 
     // use state to overide adoption status?
   };
-
-  const renderAdopt = () => {};
 
   useEffect(() => {
     if (user !== null) {
