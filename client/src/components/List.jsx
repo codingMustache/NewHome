@@ -1,17 +1,7 @@
 // React, Context, useState, useEffect
 // material ui box/container, card?
 import React, { useState, useEffect, useContext } from 'react';
-import {
-  Box,
-  Container,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemAvatar,
-  Avatar,
-  Divider,
-  Typography,
-} from '@mui/material';
+import { List } from '@mui/material';
 import { UserContext } from '../UserContext.jsx';
 import ListEntry from './ListEntry.jsx';
 
@@ -19,40 +9,14 @@ function PetList({ list }) {
   if (list === null) {
     return <div>Saved Pets go here</div>;
   }
-
+  /// fix key render here
   return (
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
       {list.map((item) => (
-        <span>
-          <ListEntry key={`${item._id}`} pet={item} />
-          <Divider variant="inset" component="li" />
-        </span>
+        <ListEntry key={item._id} pet={item} />
       ))}
     </List>
   );
 }
 
 export default PetList;
-
-//  <ListItem alignItems="flex-start">
-//         <ListItemAvatar>
-//           <Avatar alt="" src="/static/images/avatar/1.jpg" />
-//         </ListItemAvatar>
-//         <ListItemText
-//           primary="Brunch this weekend?"
-//           secondary={
-//             <React.Fragment>
-//               <Typography
-//                 sx={{ display: 'inline' }}
-//                 component="span"
-//                 variant="body2"
-//                 color="text.primary"
-//               >
-//                 Ali Connors
-//               </Typography>
-//               {" — I'll be in your neighborhood doing errands this…"}
-//             </React.Fragment>
-//           }
-//         />
-//       </ListItem>
-//       <Divider variant="inset" component="li" />

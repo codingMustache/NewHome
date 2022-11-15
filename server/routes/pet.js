@@ -182,7 +182,7 @@ pet.get('/followPet/:userId', (req, res) => {
 
         res.status(200).send(results);
       } catch (err) {
-        console.error('my dreams are now nightmares\n', err);
+        console.error('my dreams are now niasdfasdghtmares\n', err);
       }
     })
     .catch((err) => {
