@@ -8,8 +8,8 @@ const session = require('express-session');
 const aws = require('aws-sdk');
 const path = require('path');
 const { user, pet, feed } = require('./routes');
-const Post = require('./db/models/Post');
-const User = require('./db/models/User');
+const Post = require('./db/models/Post.js');
+const User = require('./db/models/User.js');
 
 // Generating application and setting url
 const app = express();
