@@ -9,6 +9,8 @@ import PostFeed from './components/PostFeed.jsx';
 import Search from './components/Search.jsx';
 import PostForms from './components/PostForms.jsx';
 import PetView from './components/PetView.jsx';
+import TheWheel from './components/V2/Roulette/TheWheel.jsx';
+import RoulettePick from './components/V2/Roulette/RoulettePick.jsx';
 import { UserContextProvider } from './UserContext.jsx';
 import BreedInfo from './components/v2/BreedInfo.jsx';
 
@@ -26,6 +28,7 @@ root.render(
           <Route path="postforms" element={<PostForms />} />
           <Route path="petview" element={<PetView />} />
           <Route path="breedInfo" element={<BreedInfo />} />
+          <Route path="wheel" element={<TheWheel />} />
         </Route>
       </Routes>
     </BrowserRouter>
