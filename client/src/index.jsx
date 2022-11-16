@@ -28,6 +28,7 @@ root.render(
           <Route path="postforms" element={<PostForms />} />
           <Route path="petview" element={<PetView />} />
           <Route path="breedInfo" element={<BreedInfo />} />
+          <Route path="roulette" element={<RoulettePick />} />
           <Route path="wheel" element={<TheWheel />} />
         </Route>
       </Routes>
