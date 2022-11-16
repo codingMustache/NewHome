@@ -65,6 +65,12 @@ function App() {
             onClick={handleClick}
             id="/login"
           />
+          <Tab
+            value="/wheel"
+            label="THE WHEEL"
+            onClick={handleClick}
+            id="/wheel"
+          />
           {user ? (
             <Tab
               value="/postFeed"
