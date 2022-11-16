@@ -1,5 +1,9 @@
 {
-  "extends": ["eslint:recommended", "airbnb", "airbnb/hooks"],
+  "extends": [
+    "eslint:recommended",
+    "airbnb",
+    "airbnb/hooks"
+  ],
   "env": {
     "es6": true,
     "browser": true

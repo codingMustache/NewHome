@@ -60,10 +60,10 @@ function App() {
             id="/home"
           />
           <Tab
-            value="/login"
+            value="/breedInfo"
             label="Dog Breed Info"
             onClick={handleClick}
-            id="/login"
+            id="/breedInfo"
           />
           <Tab
             value="/login"

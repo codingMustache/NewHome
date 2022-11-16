@@ -12,6 +12,7 @@ import PetView from './components/PetView.jsx';
 import TheWheel from './components/V2/Roulette/TheWheel.jsx';
 import RoulettePick from './components/V2/Roulette/RoulettePick.jsx';
 import { UserContextProvider } from './UserContext.jsx';
+import BreedInfo from './components/v2/BreedInfo.jsx';
 
 const root = ReactDOM.createRoot(document.getElementById('app'));
 root.render(
@@ -26,7 +27,7 @@ root.render(
           <Route path="postfeed" element={<PostFeed />} />
           <Route path="postforms" element={<PostForms />} />
           <Route path="petview" element={<PetView />} />
-          <Route path="roulette" element={<RoulettePick />} />
+          <Route path="breedInfo" element={<BreedInfo />} />
           <Route path="wheel" element={<TheWheel />} />
         </Route>
       </Routes>
