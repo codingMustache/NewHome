@@ -72,10 +72,10 @@ function App() {
             id="/login"
           />
           <Tab
-            value="/login"
+            value="/roulette"
             label="Pet Roulette"
             onClick={handleClick}
-            id="/login"
+            id="/roulette"
           />
           <Tab
             value="/login"
