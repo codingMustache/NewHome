@@ -10,6 +10,7 @@ import Search from './components/Search.jsx';
 import PostForms from './components/PostForms.jsx';
 import PetView from './components/PetView.jsx';
 import { UserContextProvider } from './UserContext.jsx';
+import BreedInfo from './components/v2/BreedInfo.jsx';
 
 const root = ReactDOM.createRoot(document.getElementById('app'));
 root.render(
@@ -24,6 +25,7 @@ root.render(
           <Route path="postfeed" element={<PostFeed />} />
           <Route path="postforms" element={<PostForms />} />
           <Route path="petview" element={<PetView />} />
+          <Route path="breedInfo" element={<BreedInfo />} />
         </Route>
       </Routes>
     </BrowserRouter>

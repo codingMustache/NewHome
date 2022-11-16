@@ -1,5 +1,9 @@
 {
-  "extends": ["eslint:recommended", "airbnb", "airbnb/hooks"],
+  "extends": [
+    "eslint:recommended",
+    "airbnb",
+    "airbnb/hooks"
+  ],
   "env": {
     "es6": true,
     "browser": true
@@ -12,21 +16,62 @@
     }
   },
   "rules": {
-    "import/extensions": ["warn", "always", {"ignorePackages": true}], 
-    "no-unused-vars": ["warn", { "vars": "local", "args": "after-used", "ignoreRestSiblings": false }],
-    "no-use-before-define": ["off"],
-    "no-shadow": ["off"],
-    "react/no-unknown-property": ["off"],
-    "no-tabs": ["off"],
-    "no-mixed-spaces-and-tabs": ["off"],
-    "react/forbid-prop-types": ["off"],
-    "react-hooks/exhaustive-deps": ["off"],
-    "consistent-return": ["off"],
-    "react/jsx-props-no-spreading": ["off"],
-    "no-underscore-dangle": ["off"],
-    "react/prop-types": ["off"],
-    "no-empty": ["off"],
-    "no-nested-ternary": ["off"],
-    "no-param-reassign": ["off"]
+    "import/extensions": [
+      "warn",
+      "always",
+      {
+        "ignorePackages": true
+      }
+    ],
+    "no-unused-vars": [
+      "warn",
+      {
+        "vars": "local",
+        "args": "after-used",
+        "ignoreRestSiblings": false
+      }
+    ],
+    "no-use-before-define": [
+      "off"
+    ],
+    "no-shadow": [
+      "off"
+    ],
+    "react/no-unknown-property": [
+      "off"
+    ],
+    "no-tabs": [
+      "off"
+    ],
+    "no-mixed-spaces-and-tabs": [
+      "off"
+    ],
+    "react/forbid-prop-types": [
+      "off"
+    ],
+    "react-hooks/exhaustive-deps": [
+      "off"
+    ],
+    "consistent-return": [
+      "off"
+    ],
+    "react/jsx-props-no-spreading": [
+      "off"
+    ],
+    "no-underscore-dangle": [
+      "off"
+    ],
+    "react/prop-types": [
+      "off"
+    ],
+    "no-empty": [
+      "off"
+    ],
+    "no-nested-ternary": [
+      "off"
+    ],
+    "no-param-reassign": [
+      "off"
+    ]
   }
 }
