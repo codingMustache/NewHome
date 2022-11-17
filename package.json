@@ -35,6 +35,7 @@
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "express-session": "1.17.3",
+    "mapbox-gl": "^2.11.0",
     "mongoose": "^6.6.0",
     "nodemon": "^2.0.19",
     "passport": "^0.6.0",
@@ -45,7 +46,9 @@
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-map-gl": "^7.0.19",
     "react-router-dom": "^6.3.0",
+    "react-scripts": "^4.0.3",
     "react-wheel-of-prizes": "^1.0.9",
     "webpack-cli": "^4.10.0"
   },
@@ -64,5 +67,9 @@
     "lint-staged": "^13.0.3",
     "prettier": "2.7.1",
     "webpack": "^5.74.0"
-  }
+  },
+  "browserslist": [
+    "defaults",
+    "not ie 11"
+  ]
 }
