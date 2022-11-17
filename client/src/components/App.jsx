@@ -74,12 +74,7 @@ function App() {
             onClick={handleClick}
             id="/roulette"
           />
-          <Tab
-            value="/login"
-            label="Pet Quiz"
-            onClick={handleClick}
-            id="/login"
-          />
+          <Tab value="/quiz" label="Quiz" onClick={handleClick} id="/quiz" />
           <Tab
             value="/login"
             label="ChatRoom"
