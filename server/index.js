@@ -7,7 +7,9 @@ const express = require('express');
 const session = require('express-session');
 const aws = require('aws-sdk');
 const path = require('path');
-const { user, pet, feed } = require('./routes');
+const {
+  user, pet, feed, breeds,
+} = require('./routes');
 const Post = require('./db/models/Post.js');
 const User = require('./db/models/User.js');
 
@@ -32,6 +34,7 @@ app.use(passport.session());
 app.use('/feed', feed);
 app.use('/user', user);
 app.use('/pet', pet);
+app.use('/breeds', breeds);
 
 aws.config.update({
   accessKeyId: process.env.STORJ_API_KEY,
