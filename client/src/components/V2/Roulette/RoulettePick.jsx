@@ -9,12 +9,9 @@ import {
   Typography,
   Grid,
 } from '@mui/material';
-import {
-  Link, useNavigate, Outlet, useLocation,
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function RoulettePick() {
-  const navigate = useNavigate();
   const [user, setUser] = useState({});
   const [animals, setAnimals] = useState([]);
 

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import WheelComponent from 'react-wheel-of-prizes';
 import { useLocation } from 'react-router-dom';
 import { UserContext } from '../../../UserContext.jsx';
@@ -14,7 +14,6 @@ function TheWheel() {
     const winningObj = animalObjs.filter(
       (animal) => animal.name === winnerName,
     )[0];
-    console.log(winningObj);
     axios
       .put(`/pet/${winningObj._id}`, {
         pet: {
@@ -22,9 +21,7 @@ function TheWheel() {
           adopted: 'adopted',
         },
       })
-      .catch((err) => {
-        console.error('error updating pet from client req\n', err);
-      });
+      .catch((err) => console.error('error updating pet from client req\n', err));
   };
 
   return (
