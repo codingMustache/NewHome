@@ -1,8 +1,5 @@
-import axios from 'axios';
-import React, { useEffect, useState, useContext } from 'react';
-import {
-  Link, useNavigate, Outlet, useLocation,
-} from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { Box, Tabs, Tab } from '@mui/material';
 import { styles } from '../styles.jsx';
 import { UserContext } from '../UserContext.jsx';
