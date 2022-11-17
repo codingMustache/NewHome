@@ -26,10 +26,9 @@ function RoulettePick() {
   };
 
   const useSaved = () => {
-    console.log(animals);
     axios
       .get(`/pet/savePet/${user.id}`)
-      .then((data) => setAnimals(data.data))
+      .then((data) => setAnimals(data.data.filter((a) => a.adopted === 'adoptable')))
       .catch((err) => console.log(err, 'pet err'));
   };
 
@@ -43,7 +42,10 @@ function RoulettePick() {
       <button type="button" onClick={useSaved}>
         Use saved animals
       </button>
-      <Link to="/wheel" state={{ wheelArray: animals.map((a) => a.name) }}>
+      <Link
+        to="/wheel"
+        state={{ wheelArray: animals.map((a) => a.name), animalObjs: animals }}
+      >
         <button type="button">Start THE WHEEL</button>
       </Link>
     </div>
