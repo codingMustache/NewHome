@@ -1,11 +1,21 @@
 import React from 'react';
+import Button from '@mui/material/Button';
 import Question from './Question.jsx';
+import quizData from './quizData.js';
 
 function Questions() {
   return (
-    <div>
-      <Question />
-    </div>
+    <form>
+      {quizData.map((question) => (
+        <div>
+          <Question question={question} />
+          <br />
+        </div>
+      ))}
+      <Button type="submit" variant="outlined">
+        Submit Answer
+      </Button>
+    </form>
   );
 }
 

@@ -1,10 +1,10 @@
 import React from 'react';
-import Question from './Question.jsx';
+import Questions from './Questions.jsx';
 
 function Quiz() {
   return (
     <div>
-      <Question />
+      <Questions />
     </div>
   );
 }
