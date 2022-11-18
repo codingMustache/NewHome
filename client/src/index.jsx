@@ -13,7 +13,8 @@ import TheWheel from './components/V2/Roulette/TheWheel.jsx';
 import RoulettePick from './components/V2/Roulette/RoulettePick.jsx';
 import { UserContextProvider } from './UserContext.jsx';
 import PetMap from './components/V2/PetMap/PetMap.jsx';
-import BreedInfo from './components/v2/BreedInfo.jsx';
+import BreedInfo from './components/V2/BreedInfo.jsx';
+import Chatroom from './components/V2/Chatroom/Chatroom.jsx';
 
 const root = ReactDOM.createRoot(document.getElementById('app'));
 root.render(
@@ -32,6 +33,7 @@ root.render(
           <Route path="roulette" element={<RoulettePick />} />
           <Route path="wheel" element={<TheWheel />} />
           <Route path="PetMap" element={<PetMap />} />
+          <Route path="Chatroom" element={<Chatroom />} />
         </Route>
       </Routes>
     </BrowserRouter>

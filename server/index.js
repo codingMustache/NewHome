@@ -12,7 +12,7 @@ const {
 } = require('./routes');
 const Post = require('./db/models/Post.js');
 const User = require('./db/models/User.js');
-
+const Chat = require('./db/models/Chat.js');
 // Generating application and setting url
 const app = express();
 const PORT = 8080;
@@ -35,6 +35,30 @@ app.use('/feed', feed);
 app.use('/user', user);
 app.use('/pet', pet);
 app.use('/breeds', breeds);
+
+app.post('/chat', (req, res) => {
+  // console.log(req.body.text);
+  console.log('USER HERE', req);
+  const insertObj = {
+    from: req.user.email,
+    text: req.body.text,
+  };
+  Chat.create(insertObj)
+    .then((data) => {
+      if (data) {
+        res.sendStatus(201);
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    .catch((error) => res.sendStatus(500));
+});
+
+app.get('/chat', (req, res) => {
+  Chat.find({})
+    .then((data) => res.status(200).send(data.reverse().slice(0, 10)))
+    .catch((error) => res.sendStatus(500));
+});
 
 aws.config.update({
   accessKeyId: process.env.STORJ_API_KEY,
