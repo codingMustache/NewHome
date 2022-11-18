@@ -10,7 +10,7 @@ const questions = [
   },
   {
     questionText:
-			'If you were isolated on a desert island but could take one item. Which of these items would you take?',
+			'If you were isolated on a desert island but could only take one item. Which of these items would you take?',
     answerOptions: [
       { answerText: 'Bathing Suit', answerKey: 'rabbit' },
       { answerText: 'Box of Matches', answerKey: 'cat' },

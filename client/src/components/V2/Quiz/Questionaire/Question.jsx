@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import styled from 'styled-components';
 import {
   Radio,
   RadioGroup,
@@ -7,11 +8,20 @@ import {
   FormLabel,
 } from '@mui/material';
 
+const QuestionText = styled(FormLabel)`
+	color: #5d473d;
+	font-size: 125%;
+`;
+
 function Question({ question, handleChange }) {
   return (
     <div>
-      <FormControl>
-        <FormLabel>{question.questionText}</FormLabel>
+      <FormControl
+        aria-labelledby="radio-buttons-group-label"
+        name="radio-buttons-group"
+        defaultValue={question.answerOptions[0].answerKey}
+      >
+        <QuestionText>{question.questionText}</QuestionText>
         <RadioGroup>
           <FormControlLabel
             value={question.answerOptions[0].answerKey}
