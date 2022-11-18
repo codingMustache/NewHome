@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Question from './Question.jsx';
-import quizData from './quizData.js';
+import questions from './quizData.js';
 
-function Questionaire() {
+function Questionaire({ setView }) {
   const answers = {
     dog: 0,
     cat: 0,
@@ -10,18 +10,38 @@ function Questionaire() {
     rabbit: 0,
   };
   const [currentQuestion, setCurrentQuestion] = useState(0); // current question rendered
-  const [answer, setAnswer] = useState(''); // answerValue to be changed in State
-  const [answerCount, setAnswerCount] = useState(answers); // count of all answers
+  const [answer, setAnswer] = React.useState(''); // set answer
 
-  // const handleQuizClick = () => { // arg is the chosen value when question is submitted
+  const handleChange = (event) => {
+    setAnswer(event.target.value);
+  };
 
-  // };
+  const handleClick = () => {
+    // handle count
+    // console.log(answer);
+    // console.log(answers[answer]);
+    // answers[answer] += 1;
+    // // handle next question
+    const nextQuestion = currentQuestion + 1;
+    if (nextQuestion < questions.length) {
+      setCurrentQuestion(nextQuestion);
+    } else {
+      setView('result');
+    }
+  };
 
   return (
     <div>
       <form>
-        <Question question={quizData[currentQuestion]} setAnswer={setAnswer} />
-        <button type="button"> Submit Answer </button>
+        <Question
+          question={questions[currentQuestion]}
+          handleChange={handleChange}
+        />
+        <button type="button" onClick={handleClick}>
+          {' '}
+          Submit Answer
+          {' '}
+        </button>
       </form>
     </div>
   );

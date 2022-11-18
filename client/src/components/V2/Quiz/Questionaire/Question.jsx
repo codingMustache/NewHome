@@ -7,15 +7,7 @@ import {
   FormLabel,
 } from '@mui/material';
 
-function Question({ question }) {
-  const [value, setValue] = React.useState('');
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  console.log(value);
-
+function Question({ question, handleChange }) {
   return (
     <div>
       <FormControl>
