@@ -1,6 +1,5 @@
 import React from 'react';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import { Container, Typography } from '@mui/material';
 
 function Result({ result }) {
   const response = () => {
