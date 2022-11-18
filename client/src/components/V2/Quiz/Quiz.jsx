@@ -25,10 +25,7 @@ function Quiz() {
   return (
     <div>
       <h1>The Quiz</h1>
-      <div>
-        {renderView()}
-        {console.log(view)}
-      </div>
+      <div>{renderView()}</div>
     </div>
   );
 }

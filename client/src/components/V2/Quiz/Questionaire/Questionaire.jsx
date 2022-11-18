@@ -15,28 +15,35 @@ function Questionaire({ setView, setResult }) {
   };
 
   const handleClick = () => {
-    // handle count
-    if (answer === 'dog') {
-      setDogCount(dogCount + 1);
-    } else if (answer === 'cat') {
-      setCatCount(catCount + 1);
-    } else if (answer === 'rabbit') {
-      setRabbitCount(rabbitCount + 1);
-    } else if (answer === 'noPets') {
-      setNoPetsCount(noPetsCount + 1);
-    }
+    const answers = [
+      { type: 'dog', count: dogCount },
+      { type: 'cat', count: catCount },
+      { type: 'rabbit', count: rabbitCount },
+      { type: 'noPets', count: noPetsCount },
+    ];
+
+    (function setCount() {
+      // handle count
+      if (answer === 'dog') {
+        setDogCount(dogCount + 1);
+      } else if (answer === 'cat') {
+        setCatCount(catCount + 1);
+      } else if (answer === 'rabbit') {
+        setRabbitCount(rabbitCount + 1);
+      } else if (answer === 'noPets') {
+        setNoPetsCount(noPetsCount + 1);
+      }
+    }());
     // // handle next question
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
     } else {
-      const answers = [
-        { type: 'dog', count: dogCount },
-        { type: 'cat', count: catCount },
-        { type: 'rabbit', count: rabbitCount },
-        { type: 'noPets', count: noPetsCount },
-      ];
-
+      for (let i = 0; i < answers.length; i += 1) {
+        if (answers[i].type === answer) {
+          answers[i].count += 1;
+        }
+      }
       const sortAnswers = answers.sort((a, b) => b.count - a.count);
       setResult(sortAnswers[0].type);
       setView('result');
