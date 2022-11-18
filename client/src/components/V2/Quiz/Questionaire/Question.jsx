@@ -5,12 +5,11 @@ import {
   RadioGroup,
   FormControl,
   FormControlLabel,
-  FormLabel,
+  Typography,
 } from '@mui/material';
 
-const QuestionText = styled(FormLabel)`
+const QuestionText = styled(Typography)`
 	color: #5d473d;
-	font-size: 125%;
 `;
 
 function Question({ question, handleChange }) {
@@ -21,32 +20,16 @@ function Question({ question, handleChange }) {
         name="radio-buttons-group"
         defaultValue={question.answerOptions[0].answerKey}
       >
-        <QuestionText>{question.questionText}</QuestionText>
+        <QuestionText variant="h6">{question.questionText}</QuestionText>
         <RadioGroup>
-          <FormControlLabel
-            value={question.answerOptions[0].answerKey}
-            control={<Radio />}
-            label={question.answerOptions[0].answerText}
-            onChange={handleChange}
-          />
-          <FormControlLabel
-            value={question.answerOptions[1].answerKey}
-            control={<Radio />}
-            label={question.answerOptions[1].answerText}
-            onChange={handleChange}
-          />
-          <FormControlLabel
-            value={question.answerOptions[2].answerKey}
-            control={<Radio />}
-            label={question.answerOptions[2].answerText}
-            onChange={handleChange}
-          />
-          <FormControlLabel
-            value={question.answerOptions[3].answerKey}
-            control={<Radio />}
-            label={question.answerOptions[3].answerText}
-            onChange={handleChange}
-          />
+          {question.answerOptions.map((answer) => (
+            <FormControlLabel
+              value={answer.answerKey}
+              control={<Radio />}
+              label={answer.answerText}
+              onChange={handleChange}
+            />
+          ))}
         </RadioGroup>
       </FormControl>
     </div>
