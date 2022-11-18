@@ -10,9 +10,7 @@ function QuizIntro({ setView }) {
 				  setView('questionaire');
         }}
       >
-        {' '}
         Ready to Take the Quiz?
-        {' '}
       </button>
     </div>
   );
