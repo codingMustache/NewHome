@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Typography, Container } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 import Questionaire from './Questionaire/Questionaire.jsx';
 import QuizIntro from './QuizIntro.jsx';
 import Result from './Result.jsx';
