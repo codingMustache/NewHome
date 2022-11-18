@@ -1,12 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import {
-  Radio,
-  RadioGroup,
-  FormControl,
-  FormControlLabel,
-  Typography,
-} from '@mui/material';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Typography from '@mui/material/Typography';
 
 const QuestionText = styled(Typography)`
 	color: #5d473d;

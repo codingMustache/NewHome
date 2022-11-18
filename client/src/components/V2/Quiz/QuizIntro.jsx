@@ -1,5 +1,7 @@
 import React from 'react';
-import { Button, Typography, Container } from '@mui/material';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 import styled from 'styled-components';
 
 const CenterButt = styled.div`
