@@ -13,7 +13,7 @@ function Result({ result }) {
   return (
     <Container>
       <br />
-      <Typography variant="h2" align="center">
+      <Typography variant="h3" align="center">
         {response()}
       </Typography>
     </Container>
