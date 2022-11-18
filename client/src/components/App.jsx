@@ -84,10 +84,10 @@ function App() {
             id="/login"
           />
           <Tab
-            value="/login"
+            value="/chatroom"
             label="ChatRoom"
             onClick={handleClick}
-            id="/login"
+            id="/chatroom"
           />
           {user ? (
             <Tab

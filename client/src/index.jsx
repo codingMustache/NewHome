@@ -9,11 +9,12 @@ import PostFeed from './components/PostFeed.jsx';
 import Search from './components/Search.jsx';
 import PostForms from './components/PostForms.jsx';
 import PetView from './components/PetView.jsx';
-import TheWheel from './components/V2/Roulette/TheWheel.jsx';
-import RoulettePick from './components/V2/Roulette/RoulettePick.jsx';
+import TheWheel from './components/V2s/Roulette/TheWheel.jsx';
+import RoulettePick from './components/V2s/Roulette/RoulettePick.jsx';
 import { UserContextProvider } from './UserContext.jsx';
-import PetMap from './components/V2/PetMap/PetMap.jsx';
-import BreedInfo from './components/v2/BreedInfo.jsx';
+import PetMap from './components/V2s/PetMap/PetMap.jsx';
+import BreedInfo from './components/V2s/BreedInfo.jsx';
+import Chatroom from './components/V2s/Chatroom/Chatroom.jsx';
 
 const root = ReactDOM.createRoot(document.getElementById('app'));
 root.render(
@@ -32,6 +33,7 @@ root.render(
           <Route path="roulette" element={<RoulettePick />} />
           <Route path="wheel" element={<TheWheel />} />
           <Route path="PetMap" element={<PetMap />} />
+          <Route path="Chatroom" element={<Chatroom />} />
         </Route>
       </Routes>
     </BrowserRouter>

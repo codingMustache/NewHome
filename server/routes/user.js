@@ -4,6 +4,13 @@ const User = require('../db/models/User.js');
 
 const user = express.Router();
 
+user.get('/findUser:id', (req, res) => {
+  // console.log('test', req.params.id);
+  User.find({ email: req.params.id })
+    .then((data) => res.status(200).send(data))
+    .catch((error) => res.sendStatus(500));
+});
+
 user.post('/', (req, res) => {
   const saveUser = async () => {
     try {
