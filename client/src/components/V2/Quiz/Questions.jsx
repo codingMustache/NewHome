@@ -1,7 +1,7 @@
 import React from 'react';
 import Question from './Question.jsx';
 
-function Quiz() {
+function Questions() {
   return (
     <div>
       <Question />
@@ -9,4 +9,4 @@ function Quiz() {
   );
 }
 
-export default Quiz;
+export default Questions;
