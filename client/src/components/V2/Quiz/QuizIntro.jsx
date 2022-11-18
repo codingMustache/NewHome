@@ -6,11 +6,11 @@ import styled from 'styled-components';
 
 const CenterDiv = styled.div`
 	margin: auto;
-	width: 50%;
+	/* width: 50%; */
 `;
 
 const CenterButt = styled.div`
-	margin-left: 10%;
+	margin-left: 30%;
 	width: 100%;
 `;
 
