@@ -1,7 +1,18 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
+import { Typography, Container } from '@mui/material';
 import Questionaire from './Questionaire/Questionaire.jsx';
 import QuizIntro from './QuizIntro.jsx';
 import Result from './Result.jsx';
+
+const Contain = styled(Container)`
+	background-color: aliceblue;
+	padding: 10%;
+	height: 100%;
+	opacity: 95%;
+	margin: auto;
+	width: 50%;
+`;
 
 function Quiz() {
   const [result, setResult] = useState(''); // current question rendered
@@ -23,9 +34,15 @@ function Quiz() {
   };
 
   return (
-    <div>
-      <div>{renderView()}</div>
-    </div>
+    <Contain fixed>
+      <div>
+        <Typography variant="h1" align="center">
+          Perfect Pet Picker
+        </Typography>
+        <br />
+        <div>{renderView()}</div>
+      </div>
+    </Contain>
   );
 }
 

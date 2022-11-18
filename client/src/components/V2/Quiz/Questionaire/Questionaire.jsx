@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
+import { Paper, Button } from '@mui/material';
+import styled from 'styled-components';
 import Question from './Question.jsx';
 import questions from './quizData.js';
+
+const QuestionCard = styled(Paper)`
+	color: '#A64B2A';
+	padding: 20px;
+	margin: 5%;
+`;
 
 function Questionaire({ setView, setResult }) {
   const [noPetsCount, setNoPetsCount] = useState(0);
@@ -51,19 +59,20 @@ function Questionaire({ setView, setResult }) {
   };
 
   return (
-    <div>
+    <QuestionCard>
       <form>
         <Question
           question={questions[currentQuestion]}
           handleChange={handleChange}
         />
-        <button type="button" onClick={handleClick}>
+        <br />
+        <Button type="button" variant="outlined" onClick={handleClick}>
           {' '}
           Submit Answer
           {' '}
-        </button>
+        </Button>
       </form>
-    </div>
+    </QuestionCard>
   );
 }
 
