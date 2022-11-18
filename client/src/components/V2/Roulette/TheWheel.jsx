@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useContext } from 'react';
+import React, { useContext, useState, Redirect } from 'react';
 import WheelComponent from 'react-wheel-of-prizes';
 import { useLocation } from 'react-router-dom';
 import { UserContext } from '../../../UserContext.jsx';
@@ -8,6 +8,7 @@ function TheWheel() {
   const location = useLocation();
   const { user } = useContext(UserContext);
   const { wheelArray, animalObjs } = location.state;
+  const [redirect, setRedirect] = useState({ url: null, bool: false });
   const segColors = ['#EE4040'];
 
   const adoptWinner = (winnerName) => {
@@ -22,6 +23,8 @@ function TheWheel() {
         },
       })
       .catch((err) => console.error('error updating pet from client req\n', err));
+    setRedirect({ url: winningObj.link, bool: true });
+    console.log(winningObj);
   };
 
   return (
@@ -34,6 +37,9 @@ function TheWheel() {
         onFinished={(winner) => adoptWinner(winner)}
         isOnlyOnce={false}
       />
+      {redirect.bool === true ? (
+        <a href={redirect.url}>Go to Adoption Page</a>
+      ) : null}
     </div>
   );
 }
