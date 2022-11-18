@@ -51,10 +51,16 @@ const savedPetSchema = new Schema({
   _id: Number,
 });
 
+const chatSchema = new Schema({
+  from: String,
+  text: String,
+});
+
 module.exports = {
   userSchema,
   petSchema,
   postSchema,
   followersSchema,
   savedPetSchema,
+  chatSchema,
 };

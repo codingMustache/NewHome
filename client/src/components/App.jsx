@@ -76,10 +76,10 @@ function App() {
           />
           <Tab value="/quiz" label="Quiz" onClick={handleClick} id="/quiz" />
           <Tab
-            value="/login"
+            value="/chatroom"
             label="ChatRoom"
             onClick={handleClick}
-            id="/login"
+            id="/chatroom"
           />
           {user ? (
             <Tab
