@@ -1,8 +1,5 @@
-import axios from 'axios';
-import React, { useEffect, useState, useContext } from 'react';
-import {
-  Link, useNavigate, Outlet, useLocation,
-} from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { Box, Tabs, Tab } from '@mui/material';
 import { styles } from '../styles.jsx';
 import { UserContext } from '../UserContext.jsx';
@@ -77,12 +74,7 @@ function App() {
             onClick={handleClick}
             id="/roulette"
           />
-          <Tab
-            value="/login"
-            label="Pet Quiz"
-            onClick={handleClick}
-            id="/login"
-          />
+          <Tab value="/quiz" label="Quiz" onClick={handleClick} id="/quiz" />
           <Tab
             value="/chatroom"
             label="ChatRoom"
