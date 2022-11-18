@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import Paper from '@mui/material/Paper';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
+import { Paper, Button } from '@mui/material';
 import styled from 'styled-components';
 import Question from './Question.jsx';
 import questions from './quizData.js';
