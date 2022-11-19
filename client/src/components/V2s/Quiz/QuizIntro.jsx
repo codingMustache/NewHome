@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import styled from 'styled-components';
+import Rabbatog from './Rabbatog.png';
 
 const CenterButt = styled.div`
 	margin-left: 30%;
@@ -12,8 +13,11 @@ const CenterButt = styled.div`
 function QuizIntro({ setView }) {
   return (
     <Container>
-      <Typography variant="h3" align="center">
-        Welcome to the Quiz!
+      <img src={Rabbatog} alt="Rabbatog" />
+      <br />
+      <Typography variant="h6" align="center">
+        Dogs, rabbits and cats. Oh my! All of them are cute and cuddly, but
+        which animal is most suited to your personality?
       </Typography>
       <br />
       <CenterButt>
