@@ -1,12 +1,15 @@
 // Imports/Dependencies
 require('dotenv').config();
 require('./db/index.js');
+
+const { GOOGLE_MAP_API } = process.env;
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const express = require('express');
 const session = require('express-session');
 const aws = require('aws-sdk');
 const path = require('path');
+const axios = require('axios');
 const {
   user, pet, feed, breeds,
 } = require('./routes');
@@ -38,7 +41,7 @@ app.use('/breeds', breeds);
 
 app.post('/chat', (req, res) => {
   // console.log(req.body.text);
-  console.log('USER HERE', req);
+  // console.log('USER HERE', req);
   const insertObj = {
     from: req.user.email,
     text: req.body.text,
@@ -196,6 +199,16 @@ app.get('/logout', (req, res) => {
   } else {
     res.end();
   }
+});
+
+app.get('/geocode:zip', (req, res) => {
+  axios
+    .get(
+      `https://maps.googleapis.com/maps/api/geocode/json?sensor=false&region=fr&address=MYADDRESS&components=postal_code:${req.params.zip}`,
+      { params: { key: GOOGLE_MAP_API } },
+    )
+    .then((data) => res.status(200).send(data.data.results))
+    .catch((err) => console.log(err));
 });
 
 // wildcard-catch-all

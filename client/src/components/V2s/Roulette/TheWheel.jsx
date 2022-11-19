@@ -1,6 +1,8 @@
-import { Box, Grid, Typography } from '@mui/material';
+import {
+  Box, Grid, Typography, Button,
+} from '@mui/material';
 import axios from 'axios';
-import React, { useContext, useState, Redirect } from 'react';
+import React, { useContext, useState } from 'react';
 import WheelComponent from 'react-wheel-of-prizes';
 import { useLocation } from 'react-router-dom';
 import { UserContext } from '../../../UserContext.jsx';
@@ -25,7 +27,6 @@ function TheWheel() {
       })
       .catch((err) => console.error('error updating pet from client req\n', err));
     setRedirect({ url: winningObj.link, bool: true });
-    console.log(winningObj);
   };
 
   return (
@@ -47,9 +48,6 @@ function TheWheel() {
               />
             </Typography>
           </Typography>
-          {redirect.bool === true ? (
-            <a href={redirect.url}>Go to Adoption Page</a>
-          ) : null}
         </Grid>
       </Box>
       <p>Spin</p>

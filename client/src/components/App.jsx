@@ -63,12 +63,6 @@ function App() {
             id="/breedInfo"
           />
           <Tab
-            value="/petMap"
-            label="Pet Map"
-            onClick={handleClick}
-            id="/petMap"
-          />
-          <Tab
             value="/roulette"
             label="Pet Roulette"
             onClick={handleClick}
@@ -81,14 +75,14 @@ function App() {
             onClick={handleClick}
             id="/chatroom"
           />
-          {user ? (
+          {/* {user ? (
             <Tab
               value="/postFeed"
               label="Stories"
               onClick={handleClick}
               id="/postFeed"
             />
-          ) : null}
+          ) : null} */}
         </Tabs>
       </Box>
       <br />

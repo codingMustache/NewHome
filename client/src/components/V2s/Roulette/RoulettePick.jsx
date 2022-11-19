@@ -2,26 +2,27 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import {
-  Card,
-  Button,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Typography,
-  Grid,
-  Box,
+  Button, Typography, Grid, Box,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-const componentBody = styled.div`
-	display: flex;
-	flex-direction: column;
-`;
 function RoulettePick() {
   const [user, setUser] = useState({});
   const [animals, setAnimals] = useState([]);
   const [choiceMade, setChoiceMade] = useState(false);
-
+  const ComponentBody = styled.div`
+		display: flex;
+		flex-direction: column;
+	`;
+  const ButtonStyles = styled.div`
+		box-sizing: border-box;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+		width: calc(100% + 96px);
+		align-content: center;
+		justify-content: center;
+	`;
   const retriveUserData = () => {
     axios
       .get('/proAuth')
@@ -41,8 +42,18 @@ function RoulettePick() {
     retriveUserData();
   }, []);
 
+  /**
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: calc(100% + 96px);
+    align-content: center;
+    justify-content: center;
+} */
+
   return (
-    <componentBody>
+    <ComponentBody>
       <Box>
         <Typography variant="h3">
           How To Use
@@ -57,32 +68,34 @@ function RoulettePick() {
         </Typography>
       </Box>
       <Grid container spacing={12}>
-        <Button
-          style={{ backgroundColor: '#DEA057', color: '#000' }}
-          size="large"
-          onClick={useSaved}
-        >
-          Use Saved Animals
-        </Button>
-        <br />
-        <Link
-          to="/wheel"
-          state={{
-					  wheelArray: animals.map((a) => a.name),
-					  animalObjs: animals,
-          }}
-        >
-          {choiceMade ? (
-            <Button
-              size="large"
-              style={{ backgroundColor: '#DEA057', color: '#000' }}
-            >
-              Start THE WHEEL
-            </Button>
-          ) : null}
-        </Link>
+        <ButtonStyles>
+          <Button
+            style={{ backgroundColor: '#DEA057', color: '#000' }}
+            size="large"
+            onClick={useSaved}
+          >
+            Use Saved Animals
+          </Button>
+          <br />
+          <Link
+            to="/wheel"
+            state={{
+						  wheelArray: animals.map((a) => a.name),
+						  animalObjs: animals,
+            }}
+          >
+            {choiceMade ? (
+              <Button
+                size="large"
+                style={{ backgroundColor: '#DEA057', color: '#000' }}
+              >
+                Start THE WHEEL
+              </Button>
+            ) : null}
+          </Link>
+        </ButtonStyles>
       </Grid>
-    </componentBody>
+    </ComponentBody>
   );
 }
 export default RoulettePick;
