@@ -18,7 +18,10 @@ function QuizIntro({ setView }) {
       <br />
       <CenterButt>
         <Button
-          variant="outlined"
+          variant="contained"
+          mt={2}
+          sx={{ display: 'inline-block', margin: 'auto' }}
+          type="button"
           onClick={() => {
 					  setView('questionaire');
           }}

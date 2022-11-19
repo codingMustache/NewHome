@@ -7,10 +7,11 @@ import QuizIntro from './QuizIntro.jsx';
 import Result from './Result.jsx';
 
 const Contain = styled(Container)`
-	background-color: aliceblue;
+	background-color: #eee3cb;
 	padding: 10%;
-	height: 100%;
-	opacity: 95%;
+	height: 40%;
+	border-radius: 1%;
+	border: 1px solid black;
 	margin: auto;
 	width: 50%;
 `;
@@ -37,7 +38,7 @@ function Quiz() {
   return (
     <Contain fixed>
       <div>
-        <Typography variant="h1" align="center">
+        <Typography variant="h2" align="center">
           Perfect Pet Picker
         </Typography>
         <br />
