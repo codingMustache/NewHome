@@ -1,6 +1,20 @@
+import styled from 'styled-components';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { Button, TextField } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ChatEntry from './ChatEntry.jsx';
+
+const Contain = styled(Container)`
+	background-color: #eee3cb;
+	padding: 10%;
+	height: 40%;
+	border-radius: 1%;
+	border: 1px solid black;
+	margin: auto;
+	width: 50%;
+`;
 
 function Chatroom() {
   const [text, setText] = useState('');
@@ -24,20 +38,33 @@ function Chatroom() {
   useEffect(getMsg, []);
 
   return (
-    <div>
-      <h2>Chat</h2>
-      {messages.map((msg) => (
-        <ChatEntry msg={msg} key={msg._id} />
-      ))}
-      <input
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        type="text"
-      />
-      <button type="button" onClick={sendMsg}>
-        Send
-      </button>
-    </div>
+    <Contain fixed>
+      <div>
+        <Typography variant="h2" align="center">
+          Pet Chat
+        </Typography>
+        {messages.map((msg) => (
+          <ChatEntry msg={msg} key={msg._id} />
+        ))}
+        <TextField
+          label="Chat"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          type="text"
+        />
+        <br />
+        <br />
+        <Button
+          variant="contained"
+          mt={2}
+          sx={{ display: 'inline-block', margin: 'auto' }}
+          type="button"
+          onClick={sendMsg}
+        >
+          Send
+        </Button>
+      </div>
+    </Contain>
   );
 }
 
