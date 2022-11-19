@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -199,6 +199,9 @@ function PetView() {
           </Typography>
           {hasTags()}
         </CardContent>
+        <Link to="/PetMap" state={animal.shelterInfo.address.postcode}>
+          <Button variant="contained">Location</Button>
+        </Link>
         <CardActions
           disableSpacing
           sx={{ display: 'flex', justifyContent: 'space-between' }}
