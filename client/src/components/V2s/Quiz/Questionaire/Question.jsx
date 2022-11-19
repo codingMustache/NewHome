@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import styled from 'styled-components';
 import Radio from '@mui/material/Radio';
@@ -20,12 +21,13 @@ function Question({ question, handleChange }) {
       >
         <QuestionText variant="h6">{question.questionText}</QuestionText>
         <RadioGroup>
-          {question.answerOptions.map((answer) => (
+          {question.answerOptions.map((answer, id) => (
             <FormControlLabel
               value={answer.answerKey}
               control={<Radio />}
               label={answer.answerText}
               onChange={handleChange}
+              key={`${answer.answerKey} - ${id}`}
             />
           ))}
         </RadioGroup>
