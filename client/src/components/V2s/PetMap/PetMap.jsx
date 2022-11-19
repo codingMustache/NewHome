@@ -1,10 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import Map, { Marker } from 'react-map-gl';
+import Map, {
+  Marker,
+  NavigationControl,
+  FullscreenControl,
+  GeolocateControl,
+} from 'react-map-gl';
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 function PetMap() {
+  const location = useLocation();
+  const zipCode = location.state;
   const [lng, setLng] = useState(-90.0715);
   const [lat, setLat] = useState(29.9511);
+
+  const getGeo = () => {
+    axios
+      .get(`/geocode${zipCode}`)
+      .then((data) => {
+        setLng(data.data[0].geometry.location.lng);
+        setLat(data.data[0].geometry.location.lat);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(getGeo, []);
+
   return (
     <div
       style={{
@@ -31,6 +53,9 @@ function PetMap() {
         mapStyle="mapbox://styles/mapbox/outdoors-v11"
       >
         <Marker longitude={lng} latitude={lat} />
+        <NavigationControl position="bottom-right" />
+        <FullscreenControl />
+        <GeolocateControl />
       </Map>
     </div>
   );
