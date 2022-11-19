@@ -1,5 +1,13 @@
+import styled from 'styled-components';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
+const Contain = styled(Container)`
+	background-color: #5d473d;
+	box-shadow: 5px 3px #ac9362;
+`;
 
 function ChatEntry({ msg }) {
   const [user, setUser] = useState();
@@ -15,10 +23,23 @@ function ChatEntry({ msg }) {
   useEffect(getUser, []);
 
   return (
-    <div>
-      {msg.text}
-      <div>{user ? <p>{user.firstName}</p> : <> </>}</div>
-    </div>
+    <Contain fixed>
+      <div>
+        <div>
+          <Typography color="#EEE3CB" variant="h6" align="left">
+            {user ? (
+              <p>
+                <b>{user.firstName}</b>
+                :&nbsp;
+                {msg.text}
+              </p>
+            ) : (
+              <> </>
+            )}
+          </Typography>
+        </div>
+      </div>
+    </Contain>
   );
 }
 

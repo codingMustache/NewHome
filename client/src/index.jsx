@@ -16,6 +16,7 @@ import PetMap from './components/V2s/PetMap/PetMap.jsx';
 import BreedInfo from './components/V2s/BreedInfo.jsx';
 import Chatroom from './components/V2s/Chatroom/Chatroom.jsx';
 import Quiz from './components/V2s/Quiz/Quiz.jsx';
+import BreedCard from './components/V2s/BreedCard.jsx';
 
 const root = ReactDOM.createRoot(document.getElementById('app'));
 root.render(
@@ -36,6 +37,7 @@ root.render(
           <Route path="PetMap" element={<PetMap />} />
           <Route path="Chatroom" element={<Chatroom />} />
           <Route path="quiz" element={<Quiz />} />
+          <Route path="breedCard" element={<BreedCard />} />
         </Route>
       </Routes>
     </BrowserRouter>
