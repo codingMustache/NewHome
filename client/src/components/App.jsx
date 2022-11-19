@@ -81,14 +81,14 @@ function App() {
             onClick={handleClick}
             id="/chatroom"
           />
-          {user ? (
+          {/* {user ? (
             <Tab
               value="/postFeed"
               label="Stories"
               onClick={handleClick}
               id="/postFeed"
             />
-          ) : null}
+          ) : null} */}
         </Tabs>
       </Box>
       <br />
