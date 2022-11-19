@@ -10,10 +10,8 @@ const { API_KEY, API_SECRET } = process.env;
 
 pet.get('/result/:petType', (req, res) => {
   const { petType } = req.params;
-  console.log(petType);
-  Pet.findOne({ species: petType, adopted: 'adoptable', photo: { $ne: null } })
+  Pet.find({ species: petType, adopted: 'adoptable', photo: { $ne: null } })
     .then((pets) => {
-      console.log(pets);
       res.send(pets);
     })
     .catch((err) => console.log(err));

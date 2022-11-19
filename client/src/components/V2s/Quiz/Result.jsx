@@ -18,12 +18,11 @@ function Result({ result }) {
     axios
       .get(`/pet/result/${result}`)
       .then((pet) => {
-        setResultPet(pet.data);
+        const randomIndex = Math.floor(Math.random() * pet.data.length);
+        setResultPet(pet.data[randomIndex]);
       })
       .catch((err) => console.log('Result Pet Request Failed', err));
   }, []);
-
-  console.log(resultPet);
   return (
     <Container>
       <br />
