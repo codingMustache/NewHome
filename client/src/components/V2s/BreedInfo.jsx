@@ -11,6 +11,7 @@ function BreedInfo() {
     // axios Req to get breed and images
     axios
       .get('/breeds')
+      //set state
       .then((data) => console.log(data))
       .catch((err) => console.error('Error from get Breeds: ', err));
   };
