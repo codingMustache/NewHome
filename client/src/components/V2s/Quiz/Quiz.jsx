@@ -8,8 +8,8 @@ import Result from './Result.jsx';
 
 const Contain = styled(Container)`
 	background-color: #eee3cb;
-	padding: 10%;
-	height: 40%;
+	padding: 5%;
+	height: 30%;
 	border-radius: 1%;
 	border: 1px solid black;
 	margin: auto;
