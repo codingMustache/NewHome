@@ -8,7 +8,7 @@ import ChatEntry from './ChatEntry.jsx';
 
 const Contain = styled(Container)`
 	background-color: #eee3cb;
-	padding: 10%;
+	padding: 1%;
 	height: 40%;
 	border-radius: 1%;
 	border: 1px solid black;
@@ -21,10 +21,12 @@ function Chatroom() {
   const [messages, setMessages] = useState([]);
 
   const sendMsg = () => {
-    axios
-      .post('/chat', { text })
-      .then(() => setText(''))
-      .catch((error) => console.log(error));
+    if (text.length >= 1) {
+      axios
+        .post('/chat', { text })
+        .then(() => setText(''))
+        .catch((error) => console.log(error));
+    }
   };
 
   const getMsg = () => {
@@ -59,7 +61,7 @@ function Chatroom() {
           variant="contained"
           mt={2}
           sx={{ display: 'inline-block', margin: 'auto' }}
-          type="button"
+          type="submit"
           onClick={sendMsg}
         >
           Send

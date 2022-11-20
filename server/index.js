@@ -41,7 +41,7 @@ app.use('/breeds', breeds);
 
 app.post('/chat', (req, res) => {
   // console.log(req.body.text);
-  // console.log('USER HERE', req);
+  console.log('USER HERE', req);
   const insertObj = {
     from: req.user.email,
     text: req.body.text,
