@@ -67,26 +67,26 @@ function Result({ result }) {
             />
           </Box>
 
-          <Contain>
-            <Center>
-              <Card sx={{ width: '750px' }}>
-                <CardMedia
-                  component="img"
-                  src="https://media.tenor.com/oH7PTL1exVMAAAAM/really-smh.gif"
-                />
-              </Card>
-            </Center>
-            <Typography variant="h5" align="center">
-              It has been determined that you should never own a pet.
-            </Typography>
-            <Typography
-              variant="h4"
-              align="center"
-              sx={{ padding: '50px', fontSize: '75px' }}
-            >
-              <em>Be Gone From This Site!!!</em>
-            </Typography>
-          </Contain>
+          {/* <Contain> */}
+          <Center>
+            <Card sx={{ width: '750px', border: '8px solid #A64B2A' }}>
+              <CardMedia
+                component="img"
+                src="https://media.tenor.com/oH7PTL1exVMAAAAM/really-smh.gif"
+              />
+            </Card>
+          </Center>
+          <Typography variant="h4" align="center">
+            It has been determined that you should never own a pet.
+          </Typography>
+          <Typography
+            variant="h4"
+            align="center"
+            sx={{ padding: '50px', fontSize: '75px' }}
+          >
+            <em>Be Gone From This Site!!!</em>
+          </Typography>
+          {/* </Contain> */}
         </div>
       );
     }

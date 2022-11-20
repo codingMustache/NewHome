@@ -18,7 +18,7 @@ function QuizIntro({ setView }) {
   return (
     <Container>
       <Center>
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ width: '750px', border: '8px solid #A64B2A' }}>
           <CardMedia component="img" src={Rabbatog} alt="Rabbatog" />
         </Card>
       </Center>
@@ -26,14 +26,21 @@ function QuizIntro({ setView }) {
         Dogs, rabbits, and cats. Oh my!
       </Typography>
       <Typography variant="h5" align="center">
-        All of them are cute and cuddly, but which animal is most suited to your
-        personality?
+        <em>
+          All of them are cute and cuddly, but which animal is most suited to
+          your personality?
+        </em>
       </Typography>
       <Center>
         <Button
           variant="contained"
           mt={2}
-          sx={{ display: 'inline-block', margin: 'auto' }}
+          sx={{
+					  display: 'inline-block',
+					  margin: 'auto',
+					  height: '75px',
+					  fontSize: '25px',
+          }}
           type="button"
           onClick={() => {
 					  setView('questionaire');
