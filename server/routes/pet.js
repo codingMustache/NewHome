@@ -8,6 +8,15 @@ const Follower = require('../db/models/Follower.js');
 
 const { API_KEY, API_SECRET } = process.env;
 
+pet.get('/result/:petType', (req, res) => {
+  const { petType } = req.params;
+  Pet.find({ species: petType, adopted: 'adoptable', photo: { $ne: null } })
+    .then((pets) => {
+      res.send(pets);
+    })
+    .catch((err) => console.log(err));
+});
+
 pet.post('/savePet', (req, res) => {
   // log body provided by client
   const { pet } = req.body;

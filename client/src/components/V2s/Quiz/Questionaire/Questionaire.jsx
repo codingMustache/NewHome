@@ -25,19 +25,19 @@ function Questionaire({ setView, setResult }) {
 
   const handleClick = () => {
     const answers = [
-      { type: 'dog', count: dogCount },
-      { type: 'cat', count: catCount },
-      { type: 'rabbit', count: rabbitCount },
+      { type: 'Dog', count: dogCount },
+      { type: 'Cat', count: catCount },
+      { type: 'Rabbit', count: rabbitCount },
       { type: 'noPets', count: noPetsCount },
     ];
 
     (function setCount() {
       // handle count
-      if (answer === 'dog') {
+      if (answer === 'Dog') {
         setDogCount(dogCount + 1);
-      } else if (answer === 'cat') {
+      } else if (answer === 'Cat') {
         setCatCount(catCount + 1);
-      } else if (answer === 'rabbit') {
+      } else if (answer === 'Rabbit') {
         setRabbitCount(rabbitCount + 1);
       } else if (answer === 'noPets') {
         setNoPetsCount(noPetsCount + 1);
@@ -67,10 +67,14 @@ function Questionaire({ setView, setResult }) {
           handleChange={handleChange}
         />
         <br />
-        <Button type="button" variant="outlined" onClick={handleClick}>
-          {' '}
+        <Button
+          variant="contained"
+          mt={2}
+          sx={{ display: 'inline-block', margin: 'auto' }}
+          type="button"
+          onClick={handleClick}
+        >
           Submit Answer
-          {' '}
         </Button>
       </form>
     </QuestionCard>
