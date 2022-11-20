@@ -37,8 +37,8 @@ function TheWheel() {
             The Wheel Of Adoption!!!
             <Typography color="#000" variant="subtitle1">
               {!wheelArray.length
-							  ? 'The Wheel is Hungry... add a animal to your saved'
-							  : ''}
+                ? 'The Wheel is Hungry... add a animal to your saved'
+                : ''}
               <WheelComponent
                 segments={wheelArray}
                 segColors={segColors}
@@ -46,6 +46,15 @@ function TheWheel() {
                 onFinished={(winner) => adoptWinner(winner)}
                 isOnlyOnce={false}
               />
+              {redirect.bool === true ? (
+                <Button
+                  style={{ backgroundColor: '#DEA057', color: '#000' }}
+                  size="large"
+                  href={redirect.url}
+                >
+                  Go to Adoption Page
+                </Button>
+              ) : null}
             </Typography>
           </Typography>
         </Grid>
