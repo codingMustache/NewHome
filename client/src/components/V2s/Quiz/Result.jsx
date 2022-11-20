@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Adoption from '../../Adoption.jsx';
+
+const Center = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 50px;
+`;
 
 function Result({ result }) {
   const [resultPet, setResultPet] = useState({});
@@ -26,10 +34,20 @@ function Result({ result }) {
   return (
     <Container>
       <br />
-      <Typography variant="h3" align="center">
+      <Typography
+        variant="h3"
+        align="center"
+        style={{
+				  color: '#eee3cb',
+				  border: '1px solid black',
+				  backgroundColor: '#375E3D',
+        }}
+      >
         {response()}
       </Typography>
-      <Adoption animalData={resultPet} />
+      <Center>
+        <Adoption animalData={resultPet} />
+      </Center>
     </Container>
   );
 }

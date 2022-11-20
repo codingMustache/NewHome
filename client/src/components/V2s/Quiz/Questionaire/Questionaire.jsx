@@ -67,10 +67,14 @@ function Questionaire({ setView, setResult }) {
           handleChange={handleChange}
         />
         <br />
-        <Button type="button" variant="outlined" onClick={handleClick}>
-          {' '}
+        <Button
+          variant="contained"
+          mt={2}
+          sx={{ display: 'inline-block', margin: 'auto' }}
+          type="button"
+          onClick={handleClick}
+        >
           Submit Answer
-          {' '}
         </Button>
       </form>
     </QuestionCard>
