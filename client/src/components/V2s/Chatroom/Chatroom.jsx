@@ -47,6 +47,7 @@ function Chatroom() {
           <ChatEntry msg={msg} key={msg._id} />
         ))}
         <TextField
+          fullWidth
           label="Chat"
           value={text}
           onChange={(e) => setText(e.target.value)}
