@@ -25,19 +25,17 @@ function ChatEntry({ msg }) {
   return (
     <Contain fixed>
       <div>
-        <div>
-          <Typography color="#EEE3CB" variant="h6" align="left">
-            {user ? (
-              <p>
-                <b>{user.firstName}</b>
-                :&nbsp;
-                {msg.text}
-              </p>
-            ) : (
-              <> </>
-            )}
-          </Typography>
-        </div>
+        <Typography color="#EEE3CB" variant="h6" align="left">
+          {user ? (
+            <p>
+              <b>{user.firstName}</b>
+              :&nbsp;
+              {msg.text}
+            </p>
+          ) : (
+            <> </>
+          )}
+        </Typography>
       </div>
     </Contain>
   );
